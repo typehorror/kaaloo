@@ -1,0 +1,115 @@
+/*** elements ***/
+body {
+	background-image: url(/static/images/bg.gif);
+	background-repeat: repeat-x;
+}
+
+a{
+    text-decoration: none;
+    color: #649BCE;
+}
+
+a:hover{
+    color: #333333;
+}
+
+
+form {
+    background:#F8F8F8 none repeat scroll 0 0;
+    border:1px solid #F0F0F0;
+    margin:10px 20px;
+    padding:15px 25px 0px;
+}
+
+form p label {
+    width: 8em;
+    float: left;
+    margin: 0.5em 0;
+    color:#444;
+}
+
+form .errorlist{
+    color: red;
+    list-style-type: none;
+    padding: 5px 10px 5px 30px;
+    border: 1px solid #B30030;
+    background: #FFE5EC url(/static/images/red_arrow.png) no-repeat scroll 5px center;
+}
+
+/*** styler ***/
+.right{
+    text-align: right;
+}
+
+.left{
+    text-align: left;
+}
+
+.alt{
+    color: #666666;
+    font-style: italic;
+    font-family: "Warnock Pro","Goudy Old Style","Palatino","Book Antiqua",Georgia,serif;
+}
+
+input.button{
+    background-color: #B2D17B;
+    border-bottom: 1px solid #485E21;
+    border-top: 1px solid #DDEBC7;
+    border-right: 1px solid #485E21;
+    border-left: 1px solid #DDEBC7;
+    color: white;
+    padding: 2px 5px 4px 5px;
+    //-moz-border-radius: 2px;
+    //-webkit-border-radius: 2px;
+    height: 22px;
+}
+input.button:active{
+    background-color: #A6CA68;
+    border-bottom: 1px solid #DDEBC7;
+    border-right: 1px solid #DDEBC7;
+    border-top: 1px solid #485E21;
+    border-left: 1px solid #485E21;
+}
+
+
+
+/*** main placeholder ***/
+#footer-bottom{
+    border-top: 1px dotted #eee;
+}
+
+#content{
+    border-top: 1px dotted #eee;
+}
+
+#header{
+    height: 120px;
+}
+
+#logo-text{
+    position: absolute;
+    top: 35px;
+}
+
+#slogan{
+    position: absolute;
+    top: 70px;
+    font-size: 1.4em;
+}
+
+
+
+/*** Blueprint Transformer ***/
+div.colborder{
+    border-style: dotted;
+}
+
+input[type="password"] {
+    background-color:#FFFFFF;
+    border:1px solid #BBBBBB;
+    margin: 0.5em 0;
+}
+
+input[type="password"]:focus {
+    border-color: #666666;
+}

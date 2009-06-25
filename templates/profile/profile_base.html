@@ -1,0 +1,18 @@
+{% extends "base_connected.html" %}
+
+{% block content %}
+{{ block.super }}
+	<div class="span-18 colborder">
+    {% block sub_content %}
+    {% endblock %}
+	</div>
+    <div id="right_nav" class="span-5 last">
+        <div id="gravatar"></div>
+        <div class="clear"></div>
+        <h2 class="nomargin bottomline">Shortcuts</h2>
+	    <ul class="nomargin">
+	        <li><a href="{% url profile_view %}">Personal Informations</a></li>
+	        <li><a href="{% url password_view %}">Change Your Password</a></li>
+	    </ul>
+	</div>
+{% endblock %}

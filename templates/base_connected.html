@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load gravatar %}
+{% block headerscript %}
+{{ block.super }}
+<script type="text/javascript" src="{{ STATIC_URL}}js/jquery-1.3.2.min.js" ></script>
+<script type="text/javascript" src="{{ STATIC_URL}}js/jquery.overlabel.js" ></script>
+{% endblock %}
+{% block header %}
+{{ block.super }}
+<div id="header_link" class="right span-24">
+    connected as <a href="{% url profile_view %}">{% if user.first_name %}{{ user.first_name }}{% if user.last_name %} {{ user.last_name }}{% endif %}{% else %}{{ user.email }}{% endif %}</a>
+    | <a href="{% url logout_view %}" class="button">logout</a> 
+</div>
+<div id="gravatar">{% gravatar user 80 %}</div>
+{% endblock %}
+
+
+{% block content %}
+<div id="nav" class="span-24">
+    <ul>
+        <li class="first"{% ifequal current 'home' %} id="current"{% endifequal %}><a href="#">Home</a></li>
+        <li{% ifequal current 'projects' %} id="current"{% endifequal %}><a href="style.html">Projects</a></li>
+        <li{% ifequal current 'statistics' %} id="current"{% endifequal %}><a href="blog.html">Statistics</a></li>
+        <li{% ifequal current 'archives' %} id="current"{% endifequal %}><a href="archives.html">Archives</a></li>
+        <li{% ifequal current 'contacts' %} id="current"{% endifequal %}><a href="index.html">Contacts</a></li>
+        <li{% ifequal current 'account' %} id="current"{% endifequal %}><a href="{% url profile_view %}">Profile</a></li>		
+    </ul>		
+</div>	
+{% endblock %}

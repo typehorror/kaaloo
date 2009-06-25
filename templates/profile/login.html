@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <div  class="span-11 colborder">
+	    <form action="{% url register_view %}" method="post">
+	        <h2>Register</h2>
+	        <p> To register at kaaloo it is as simple as putting your email. You're not
+	        forced to put any more personnal data.</p>
+	        {{ register_form.as_p }}
+		    <p class="right">
+		        <input type="submit" value="register" class="button" />
+		    </p>
+		</form>
+	</div>
+	<div class="span-12 last">
+	    <form action="{% url login_view %}" method="post">
+	        <h2>Login</h2>
+	        {{ login_form.as_p }}
+		    <p class="right">
+		        <input type="submit" value="connect" class="button" />
+		    </p>
+		    <p class="right"><a href="#">Have you lost your password ?</a></p>
+		</form>
+	</div>
+	<div class="clear"></div>
+{% endblock %}

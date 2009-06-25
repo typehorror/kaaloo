@@ -1,0 +1,14 @@
+{% extends "profile/profile_base.html" %}
+
+{% block sub_content %}
+    <div>
+	    <form action="{% url profile_view %}" method="post" class="white wide">
+	        <h2>Personal Informations{% if profile_saved %} - <span>Saved</span>{% endif %}</h2>
+	        {{ user_form.as_p }}
+	        {{ profile_form.as_p }}
+		    <p class="right">
+		        <input type="submit" name="change_data" value="Save Personal Data" class="button" />
+		    </p>
+		</form>
+	</div>
+{% endblock %}

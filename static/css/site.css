@@ -2,6 +2,13 @@
 body {
 	background-image: url(/static/images/bg.gif);
 	background-repeat: repeat-x;
+	color: #444;
+    font-family: 'Lucida Grande','Lucida Sans Unicode',Geneva,Verdana,Sans-Serif;
+}
+
+h1,h2,h3,h4,h5,h6{
+	color: #444;
+    font-family: Georgia,'Times New Roman',Times,serif;
 }
 
 a{
@@ -37,12 +44,19 @@ form .errorlist{
 }
 
 /*** styler ***/
+.nomargin{margin:0;}
+.nopadding{padding:0;}
+.bottomline{border-bottom: 1px dotted #eee;}
 .right{
     text-align: right;
 }
 
 .left{
     text-align: left;
+}
+
+.center{
+    text-align: center;
 }
 
 .alt{
@@ -63,6 +77,7 @@ input.button{
     //-webkit-border-radius: 2px;
     height: 22px;
 }
+
 input.button:active{
     background-color: #A6CA68;
     border-bottom: 1px solid #DDEBC7;
@@ -79,7 +94,6 @@ input.button:active{
 }
 
 #content{
-    border-top: 1px dotted #eee;
 }
 
 #header{
@@ -97,6 +111,55 @@ input.button:active{
     font-size: 1.4em;
 }
 
+#nav{
+    font-size: 1.6em;
+    border-bottom: 1px dotted #eee;
+    padding: 0px;
+    margin: 0px;
+}
+
+#header_link{
+    font-size: 1.1em;
+    color: white;
+    position: absolute;
+    top: 5px;
+}
+#header_link a{
+    color: white;
+}
+
+#header_link a:hover{
+    text-decoration: underline;
+}
+
+#right_nav ul{
+    margin-left: 0;
+}
+
+#right_nav h2{
+    font-family: Georgia,'Times New Roman',Times,serif;
+}
+
+#gravatar img{
+    float: right;
+    background: white;
+    border: 1px solid #eee;
+    padding: 5px;
+    margin: 35px 35px 0;
+}
+
+#gravatar p{
+    font-size: 1em;
+    font-family: Georgia,'Times New Roman',Times,serif;
+}
+
+#right_nav li{
+    padding: 10px 0px;
+    margin: 0;
+    font-weight: bold;
+    list-style-type: none;
+    border-bottom: 1px dotted #eee;
+}
 
 
 /*** Blueprint Transformer ***/
@@ -112,4 +175,54 @@ input[type="password"] {
 
 input[type="password"]:focus {
     border-color: #666666;
+}
+
+/*** other ***/
+#nav a{
+    color: #666;
+}
+
+#nav a:hover{
+    color: black;
+}
+
+#nav ul{
+    padding: 0;
+    margin: 0;
+}
+
+#nav li{
+    list-style-type: none;
+    display: inline;
+    border-left: 1px dotted #eee;
+    padding: 5px 15px 0px;
+}
+
+#nav li:hover{
+    border-bottom: 4px solid #649BCE;
+    color: black;
+}
+
+#nav li.first{
+    border-left: none;
+}
+
+#current{
+    border-bottom: 4px solid #649BCE;
+}
+
+form.white {
+    background:none;
+    border:none;
+}
+form.white h2{
+    border-bottom: 1px solid #eee;
+}
+
+form.wide label{
+    width: 16em;
+}
+
+h2 span{
+    color: #B2D17B;
 }

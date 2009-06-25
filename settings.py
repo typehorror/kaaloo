@@ -13,7 +13,7 @@ MANAGERS = ADMINS
 # although not all choices may be available on all operating systems.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Los_Angeles'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -64,6 +64,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     )
 
 ROOT_URLCONF = 'urls'
+AUTH_PROFILE_MODULE = 'profile.profile'
+LOGIN_REDIRECT_URL = '/profile/me/'
+LOGIN_URL= '/profile/login/'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -81,4 +84,6 @@ INSTALLED_APPS = (
     'common',
     'djangodblog',
     'mailer',
+    'gravatar',
+    'profile',
 )

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <div  class="prepend-6 span-12 append-6">
+        <form action="{% url register_confirm registration.key %}" method="post" class="wide">
+            <h2>Enter a password for your account</h2>
+	        <p>
+	        In order to create your account you need to enter a password. You will want to:
+	        <ul>
+	            <li>use at least 8 characters</li>
+	            <li>include a digit or punctuation</li>
+	            <li>use a combination of uppercase and lower case character</li>
+	            <li>avoid common words (movie title, dictionnary words...)</li>
+	            <li>avoid your email address even partially</li>
+	        </ul>
+	        </p>
+            {{ password_form.as_p }}
+		    <p class="right">
+		        <input type="submit" value="create account" class="button" />
+		    </p>
+            </p>
+        </form>
+	<div class="clear"></div>
+{% endblock %}

@@ -33,7 +33,7 @@
 	<!--header -->
 	<div id="header">
         {% block header %}
-	    <h1 id="logo-text"><a href="index.html" title="">KaaLoo</a></h1>		
+	    <h1 id="logo-text"><a href="{% url profile_view %}" title="">KaaLoo</a></h1>		
 		<p id="slogan" class="alt">Keep track of your time... </p>	
         {% endblock %}
     </div>
@@ -48,14 +48,15 @@
 	<!-- footer-bottom starts -->		
     <div class="clear"></div>
 	<div id="footer-bottom">	    
-		<div class="span-18">
+		<div class="span-14">
 			&copy; 2009 <strong>Kaaloo</strong>
 		</div>
     
-		<div class="span-6 last right">
+		<div class="span-10 last right">
             <a href="index.html">Sitemap</a> | 
             <a href="index.html">Home</a> |
-	        <a href="index.html">RSS Feed</a>
+	        <a href="index.html">Terms and conditions</a> |
+	        <a href="index.html">Privacy Policy</a>
         </div>        
 	<!-- footer-bottom ends -->		
 	</div>

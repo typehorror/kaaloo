@@ -3,6 +3,73 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.localflavor.us.models import USStateField
 
+def get_uuid():
+    import uuid
+    return str(uuid.uuid4())
+
+STATE_CHOICES=(
+('AL', 'Alabama'),
+('AK', 'Alaska'),
+('AZ', 'Arizona'),
+('AR', 'Arkansas'),
+('CA', 'California'),
+('CO', 'Colorado'),
+('CT', 'Connecticut'),
+('DE', 'Delaware'),
+('FL', 'Florida'),
+('GA', 'Georgia'),
+('HI', 'Hawaii'),
+('ID', 'Idaho'),
+('IL', 'Illinois'),
+('IN', 'Indiana'),
+('IA', 'Iowa'),
+('KS', 'Kansas'),
+('KY', 'Commonwealth of Kentucky'),
+('LA', 'Louisiana'),
+('ME', 'Maine'),
+('MD', 'Maryland'),
+('MA', 'Commonwealth of Massachusetts'),
+('MI', 'Michigan'),
+('MN', 'Minnesota'),
+('MS', 'Mississippi'),
+('MO', 'Missouri'),
+('MT', 'Montana'),
+('NE', 'Nebraska'),
+('NV', 'Nevada'),
+('NH', 'New Hampshire'),
+('NJ', 'New Jersey'),
+('NM', 'New Mexico'),
+('NY', 'New York'),
+('NC', 'North Carolina'),
+('ND', 'North Dakota'),
+('OH', 'Ohio'),
+('OK', 'Oklahoma'),
+('OR', 'Oregon'),
+('PA', 'Commonwealth of Pennsylvania'),
+('RI', 'Rhode Island and Providence Plantations'),
+('SC', 'South Carolina'),
+('SD', 'South Dakota'),
+('TN', 'Tennessee'),
+('TX', 'Texas'),
+('UT', 'Utah'),
+('VT', 'Vermont'),
+('VA', 'Commonwealth of Virginia'),
+('WA', 'Washington'),
+('WV', 'West Virginia'),
+('WI', 'Wisconsin'),
+('WY', 'Wyoming'),
+('ON', 'Ontario'),
+('QC', 'Quebec'),
+('NS', 'Nova Scotia'),
+('NB', 'New Brunswick'),
+('MB', 'Manitoba'),
+('BC', 'British Columbia'),
+('PE', 'Prince Edward Island'),
+('SK', 'Saskatchewan'),
+('AB', 'Alberta'),
+('NL', 'Newfoundland and Labrador'),
+)
+
 COUNTRY_CHOICES = (
     ('US', 'United States'),
     ('GB', 'United Kingdom'),
@@ -264,7 +331,18 @@ class Profile(models.Model):
     # Geographical Address
     address1 = models.CharField(max_length=255, blank=True)
     address2 = models.CharField(max_length=255, blank=True)
-    city = models.CharField(max_length=50, blank=True )
-    state = USStateField(blank=True, null=True)
+    city = models.CharField(max_length=50, blank=True)
+    state = models.CharField(max_length=3, choices=STATE_CHOICES, blank=True)
     zip_code = models.CharField(max_length=10, blank=True)
-    country = models.CharField(max_length=4, choices=COUNTRY_CHOICES, blank=True )
+    country = models.CharField(max_length=4, choices=COUNTRY_CHOICES, blank=True)
+
+class Registration(models.Model):
+    email = models.EmailField()
+    key = models.CharField(max_length=55, unique=True, db_index=True, default=get_uuid)
+    creation_date = models.DateTimeField(auto_now_add=True)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('profile.views.register_confirm', [str(self.key)])
+
+#class PasswordReset(models.Model)

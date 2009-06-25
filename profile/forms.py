@@ -2,11 +2,26 @@ from django import forms
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.contrib.auth import forms as authforms
+from django.conf import settings
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.models import Site
+from django.utils.http import int_to_base36
+from django.template import Context, loader
 
-from profile.models import Profile
+from common.shortcuts import render_string
+from profile.models import Profile, Registration
 
-class RegisterForm(forms.Form):
-    register_email = forms.EmailField(max_length=128, label='Email')
+# favour django-mailer but fall back to django.core.mail
+if "mailer" in settings.INSTALLED_APPS:
+    from mailer import send_mail
+else:
+    from django.core.mail import send_mail
+
+class RegisterForm(forms.ModelForm):
+    class Meta:
+        model = Registration
+        fields = ('email',)
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -17,6 +32,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('date_of_birth',
+                  'sex',
                   'phone',
                   'cellular',
                   'address1',
@@ -73,4 +89,49 @@ class LoginForm(forms.Form):
     def get_user(self):
         return self.user_cache
 
+class SetPasswordForm(forms.Form):
+    """
+    A form that lets a user change set his/her password for user creation
+    """
+    password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
+    password2 = forms.CharField(label=_("Password confirmation"), widget=forms.PasswordInput)
 
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        if password1 and password2:
+            if password1 != password2:
+                raise forms.ValidationError(_("The two password fields didn't match."))
+        return password2
+
+class PasswordResetForm(authforms.PasswordResetForm):
+    def save(self, domain_override=None, email_template_name='registration/password_reset_email.html',
+             use_https=False, token_generator=default_token_generator):
+        """
+        Generates a one-use only link for resetting password and sends to the user
+        """
+        for user in self.users_cache:
+            if not domain_override:
+                current_site = Site.objects.get_current()
+                site_name = current_site.name
+                domain = current_site.domain
+            else:
+                site_name = domain = domain_override
+            c = {
+                'STATIC_URL': settings.STATIC_URL,
+                'SUPPORT_EMAIL': settings.SUPPORT_EMAIL,
+                'DEFAULT_EMAIL_FROM': settings.DEFAULT_EMAIL_FROM,
+                'SITE_URL': domain,
+                'email': user.email,
+                'email_to': user.email,
+                'domain': domain,
+                'site_name': site_name,
+                'uid': int_to_base36(user.id),
+                'user': user,
+                'token': token_generator.make_token(user),
+                'protocol': use_https and 'https' or 'http',
+            }
+            t = loader.get_template(email_template_name)
+            text_content = t.render(Context(c))
+            
+            send_mail(_("Password reset on %s") % site_name, text_content, settings.DEFAULT_EMAIL_FROM, [user.email])

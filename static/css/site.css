@@ -226,3 +226,10 @@ form.wide label{
 h2 span{
     color: #B2D17B;
 }
+
+.message_box{
+    background-color:#F5F9FE;
+    border:1px solid #67A6F6;
+    margin: 20px 0;
+    padding: 5px;
+}

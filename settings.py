@@ -84,6 +84,7 @@ INSTALLED_APPS = (
     'common',
     'djangodblog',
     'mailer',
+    'notification',
     'gravatar',
     'profile',
 )

@@ -163,7 +163,7 @@ input.button:active{
 
 
 /*** Blueprint Transformer ***/
-div.colborder{
+div.colborder, div.border{
     border-style: dotted;
 }
 

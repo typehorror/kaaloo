@@ -119,11 +119,24 @@ input.button:active{
 }
 
 #header_link{
-    font-size: 1.1em;
-    color: white;
-    position: absolute;
-    top: 5px;
+    font-size: 1.5em;
+    color: #ccc;
 }
+
+#header_link a{
+    color: white;
+}
+
+#header_timer{
+    font-size: 1.7em;
+    color: white;
+    font-family: Georgia,'Times New Roman',Times,serif;
+}
+
+#header_actions{
+    margin-top: 5px;
+}
+
 #header_link a{
     color: white;
 }
@@ -233,3 +246,49 @@ h2 span{
     margin: 20px 0;
     padding: 5px;
 }
+
+.notification{
+    background-color:#F4F8ED;
+    border:1px solid #B2D17B;
+    margin: 10px 10px;
+    padding: 5px;
+    position: relative;
+}
+
+
+.notification h2 a{
+    font-size: .6em;
+    position: absolute;
+    top:0px;
+    right: 10px;
+}
+
+.notification h2{
+    font-size: 1.8em;
+    margin: 0px 5px;
+}
+
+.notification h2 img{
+    float: left;
+    background-color: white;
+    padding: 2px;
+    border: 1px solid #eee;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.notification p{
+    margin: 5px;
+}
+
+.notification p.notification-info{
+    font-size: .9em;
+    font-weight: bold;
+    color: #777;
+    margin: 0px 5px;
+    border-top: 1px solid #777;
+}
+
+    
+    

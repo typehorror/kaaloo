@@ -322,7 +322,7 @@ class Profile(models.Model):
     # User link (one to one relation)
     user = models.ForeignKey(User, related_name='profile', unique=True)
     sex = models.CharField("Gender", max_length=6, choices=SEX_CHOICES, blank=True)
-    date_of_birth = models.DateField(blank=True, null=True, help_text=("( format: mm/dd/yyyy )"))
+    date_of_birth = models.DateField(blank=True, null=True, help_text=("( format: yyyy-mm-dd )"))
 
     # Contact Informations
     phone = models.CharField(max_length=20, blank=True)

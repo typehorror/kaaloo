@@ -129,7 +129,7 @@ def add_contact_view(request):
                 if contact_requests:
                     context['message'] = 'You already create a request to this person. We recommand you to contact directly this person. '
                     return render_response(request, 'contact/request_already_sent.html', context)
-                if email_owner in request.user.get_profile().contacts:
+                if email_owner in request.user.get_profile().contacts.all():
                     context['message'] = 'You are already friend with this person'
                     return render_response(request, 'contact/request_already_sent.html', context)
                 contact_request = ContactRequest(from_user=request.user, to_user=email_owner)

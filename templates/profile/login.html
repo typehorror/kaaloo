@@ -5,7 +5,8 @@
 	        <h2>Login</h2>
 	        {{ login_form.as_p }}
 		    <p class="right">
-		        <input type="submit" value="connect" class="button" />
+                <input type="hidden" name="next" value="{{ next }}" />
+                <input type="submit" value="connect" class="button" />
 		    </p>
 		    <p class="right"><a href="{% url password_reset %}">Have you lost your password ?</a></p>
 		</form>

@@ -1,0 +1,19 @@
+{% extends "contact/contact_base.html" %}
+
+{% block sub_content %}
+    <div>
+	    <form action="{% url add_contact_view %}" method="post" class="white wide">
+	        <h2>Add a contact</h2>
+	        <p>
+	        To add a contact you have to enter his or her email. If the user is already a member of
+	        kaaloo, an email will be send to request you to be added as a new contact. If nobody is
+	        registered under the email you entered, the email's proprietary will receive an invite 
+	        to join kaaloo and be one of your contacts.
+	        </p>
+	        {{ contact_form.as_p }}
+		    <p class="right">
+		        <input type="submit" name="add_contact" value="Add Contact" class="button" />
+		    </p>
+		</form>
+	</div>
+{% endblock %}

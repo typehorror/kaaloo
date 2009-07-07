@@ -1,0 +1,26 @@
+{% extends "contact/contact_base.html" %}
+{% load gravatar %}
+{% block sub_content %}
+    <div>
+	     {% if contacts %}
+	        <h2 class="bottomline">Your contacts</h2>
+	        <ul class="contact_list">
+	        {% for contact in contacts %}
+                <li>
+                {% gravatar contact.user 40 %} 
+                <div><h3>{{ contact.name }}</h3><span>Dealing with things</span></div>
+                </li>
+		    {% endfor %}
+	        </ul>
+		{% else %}
+        <div class="message_box">
+            <h2>You don't have any contact yet</h2>
+            <p> 
+            To share a projects and tasks with someone you need this person to be one of your
+            contacts. To add a contact click <a href="{% url add_contact_view %}"> Add Contact</a>.
+            </p>
+        </div>
+	<div class="clear"></div>
+	    {% endif %}
+	</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base_connected.html" %}
+{% block content %}
+{{ block.super }}
+	<div class="span-18 border">
+    {% block sub_content %}
+    {% endblock %}
+	</div>
+    <div id="right_nav" class="span-6 last">
+        <div id="gravatar"></div>
+        <div class="clear"></div>
+        <h2 class="nomargin bottomline">Shortcuts</h2>
+	    <ul class="nomargin">
+	        <li><a href="{% url contact_view %}">Your Contacts</a></li>
+	        <li><a href="{% url add_contact_view %}">Add Contacts</a></li>
+	        <li><a href="{% url contact_requests_view %}">Contact Requests</a></li>
+	    </ul>
+	</div>
+{% endblock %}
+{% block footerscript %}
+    <script type="text/javascript">
+        $('.notification h2 a').click(function(){
+            $(this).parents('div.notification').slideToggle("slow");
+        });
+    </script>
+{% endblock %}

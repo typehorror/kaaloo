@@ -6,6 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^profile/', include('profile.urls')),
+    (r'^contact/', include('contact.urls')),
     (r'^notification/', include('notification.urls')),
 
     # Uncomment the next line to enable the admin:

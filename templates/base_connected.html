@@ -49,7 +49,7 @@
         <li{% ifequal current 'projects' %} id="current"{% endifequal %}><a href="style.html">Projects</a></li>
         <li{% ifequal current 'statistics' %} id="current"{% endifequal %}><a href="blog.html">Statistics</a></li>
         <li{% ifequal current 'archives' %} id="current"{% endifequal %}><a href="archives.html">Archives</a></li>
-        <li{% ifequal current 'contacts' %} id="current"{% endifequal %}><a href="index.html">Contacts</a></li>
+        <li{% ifequal current 'contacts' %} id="current"{% endifequal %}><a href="{% url contact_view %}">Contacts</a></li>
         <li{% ifequal current 'account' %} id="current"{% endifequal %}><a href="{% url profile_view %}">Profile</a></li>		
     </ul>		
 </div>

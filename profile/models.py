@@ -3,9 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.localflavor.us.models import USStateField
 
-def get_uuid():
-    import uuid
-    return str(uuid.uuid4())
+from common.tools import get_uuid
 
 STATE_CHOICES=(
 ('AL', 'Alabama'),
@@ -335,7 +333,17 @@ class Profile(models.Model):
     state = models.CharField(max_length=3, choices=STATE_CHOICES, blank=True)
     zip_code = models.CharField(max_length=10, blank=True)
     country = models.CharField(max_length=4, choices=COUNTRY_CHOICES, blank=True)
-
+    contacts = models.ManyToManyField('self', blank=True, symmetrical=True)
+    
+    @property
+    def name(self):
+        default_name = "%s %s" % (self.user.first_name, self.user.last_name)
+        if default_name.strip():
+            default_name = "%s - %s" % (default_name, self.user.email)
+        else:
+            default_name = self.user.email
+        return default_name.strip()
+        
 class Registration(models.Model):
     email = models.EmailField()
     key = models.CharField(max_length=55, unique=True, db_index=True, default=get_uuid)

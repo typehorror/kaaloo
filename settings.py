@@ -82,9 +82,12 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'common',
+    'south',
     'djangodblog',
     'mailer',
     'notification',
     'gravatar',
     'profile',
+    'contact',
+    #'project',
 )

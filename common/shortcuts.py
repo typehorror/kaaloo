@@ -1,5 +1,6 @@
 from django.template import RequestContext
 from django.template.loader import render_to_string
+
 def render_response(req, *args, **kwargs):
     """
     Helper method which passes RequestContext to templates instead of plain Context.

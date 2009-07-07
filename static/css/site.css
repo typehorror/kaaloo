@@ -94,6 +94,11 @@ input.button:active{
 }
 
 #content{
+    min-height:400px;
+}
+#content h1{
+    border-bottom: 1px solid #eee;
+    padding-left: 15px;
 }
 
 #header{
@@ -158,7 +163,7 @@ input.button:active{
     background: white;
     border: 1px solid #eee;
     padding: 5px;
-    margin: 35px 35px 0;
+    margin: 15px 35px 0;
 }
 
 #gravatar p{
@@ -224,6 +229,10 @@ input[type="password"]:focus {
     border-bottom: 4px solid #649BCE;
 }
 
+#current a{
+    color: black;
+}
+
 form.white {
     background:none;
     border:none;
@@ -243,7 +252,7 @@ h2 span{
 .message_box{
     background-color:#F5F9FE;
     border:1px solid #67A6F6;
-    margin: 20px 0;
+    margin: 20px;
     padding: 5px;
 }
 
@@ -255,33 +264,46 @@ h2 span{
     position: relative;
 }
 
+.contact_request_item{
+    background-color:#eee;
+    border:1px solid #bbb;
+    margin: 10px 10px;
+    padding: 5px;
+    position: relative;
+}
 
+.contact_request_item h2 a,
 .notification h2 a{
-    font-size: .6em;
     position: absolute;
-    top:0px;
     right: 10px;
 }
 
+.notification h2 a{
+    font-size: .6em;
+    top:0px;
+}
+
+.contact_request_item h2,
 .notification h2{
     font-size: 1.8em;
     margin: 0px 5px;
 }
-
 .notification h2 img{
     float: left;
     background-color: white;
-    padding: 2px;
-    border: 1px solid #eee;
+    padding: 1px;
+    border: 1px solid #666;
     width: 25px;
     height: 25px;
     margin-right: 10px;
 }
 
+.contact_request_item p,
 .notification p{
     margin: 5px;
 }
 
+.contact_request_item p.contact_request_item-info,
 .notification p.notification-info{
     font-size: .9em;
     font-weight: bold;
@@ -290,5 +312,30 @@ h2 span{
     border-top: 1px solid #777;
 }
 
-    
-    
+.contact_list li{
+    list-style-type: none;
+    border-bottom: 1px dotted #eee;
+    height: 48px;
+    margin-top: 5px;
+}
+
+.contact_list h3{
+    font-size: 1.7em;
+    margin-bottom: 0;
+}
+
+.contact_list img{
+    float: left;
+    margin-right: 5px;
+    border: 1px solid black;
+    padding: 1px;
+    border: 1px solid #666;
+}
+.contact_list span{
+    font-size: .9em;
+    color: #666;
+    font-style: italic;
+    font-weight: bold;
+}
+
+

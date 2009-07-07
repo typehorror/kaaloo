@@ -1,0 +1,13 @@
+{% extends "email/body.txt" %}
+{% block body %}
+Hello,
+    The user {% if user.first_name and user.last_name %}{{user.first_name}} {{user.last_name}} - {% endif %} {{ user.email }} would like to add you as a new contact.
+    
+    To accept or refuse this contact request, please click on the link bellow, or copy and past it in your favorite web browser:
+    
+    http://{{ SITE_URL }}{{ contact_request.get_absolute_url }}    
+    
+    We hope you to enjoy using kaaloo as we enjoy creating it.
+    
+    All the best.
+{% endblock %}

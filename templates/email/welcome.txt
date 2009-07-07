@@ -3,9 +3,7 @@
 Welcome to kaaloo,
     Your account have been successfully created and you can now connect to it using this link:
     http://{{ SITE_URL }}{% url profile_view %}
-    
-    The password you set is: {{ password }}
-    
+        
     We hope you to enjoy using kaaloo as we enjoy creating it.
     
     All the best.

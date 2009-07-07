@@ -129,7 +129,7 @@ def profile_view(request):
     Allow user to add personnal data to his profile
     """
     profile = request.user.get_profile()
-    context = {}
+    context = {'current':'account'}
     if request.method == "POST":
         profile_form = ProfileForm(instance=profile, data=request.POST)
         user_form = UserForm(instance=request.user, data=request.POST)
@@ -151,7 +151,7 @@ def password_view(request):
     Allow user to change his password by entering his old one
     """
     profile = request.user.get_profile()
-    context = {}
+    context = {'current':'account'}
     if request.method == "POST":
         password_form = PasswordChangeForm(user=request.user, data=request.POST)
         if password_form.is_valid():
@@ -159,8 +159,7 @@ def password_view(request):
             context['password_saved'] = True
     else:
         password_form =PasswordChangeForm(user=request.user)
-    context.update({'password_form': password_form,
-                    'current':'account'})
+    context.update({'password_form': password_form})
     return render_response(request, 'profile/password.html', context)
 password_view = never_cache(password_view)
     

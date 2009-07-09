@@ -89,5 +89,8 @@ INSTALLED_APPS = (
     'gravatar',
     'profile',
     'contact',
+    'project',
+    'task',
+    'timer',
     #'project',
 )

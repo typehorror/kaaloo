@@ -25,7 +25,7 @@ class Task(models.Model):
 
 
 
-class Goals(models.Model):
+class Goal(models.Model):
     task = models.ForeignKey(Task, related_name="tasks")
     title = models.CharField(max_length=50)
     done = models.BooleanField(default=False)

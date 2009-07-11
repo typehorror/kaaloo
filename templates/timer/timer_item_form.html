@@ -1,0 +1,7 @@
+<form action="{% url set_time_record time_record.id %}" method="post">
+{{ form.as_p }}
+<p class="right">
+    <input type="button" name="cancel" value="Cancel" class="button" />
+    <input type="submit" value="Update" class="button" />
+</p>
+</form>

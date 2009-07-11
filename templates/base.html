@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
    "http://www.w3.org/TR/html4/strict.dtd">
-
+{% load timer_tags %}
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -15,7 +15,6 @@
     <link rel="shortcut icon" href="{{STATIC_URL}}images/favicon.ico" />
     {% endblock %}
     {% block headerscript %}
-    <script type="text/javascript" src="{{ STATIC_URL}}js/jquery-1.3.2.min.js" ></script>
     {% endblock %}
 
     <script type="text/javascript">
@@ -33,6 +32,11 @@
 
 	<!--header -->
 	<div id="header">
+	{% if not user.is_authenticated %}
+<div id="header_actions" class="span-14">
+    <a href="{% url unconnected_view %}" style="color: white; font-size: 1.4em;text-decoration: underline;">click here to use kaaloo without registering</a>
+</div>
+    {% endif %}
         {% block header %}
 	    <h1 id="logo-text"><a href="{% url profile_view %}" title="">KaaLoo</a></h1>		
 		<p id="slogan" class="alt">Keep track of your time... </p>	
@@ -64,8 +68,8 @@
 	
 <!-- wrap ends here -->
 </div>
-
-{% block footerscript %}{% endblock %}
+{% block footerscript %}
+{% endblock %}
 
 </body>
 </html>

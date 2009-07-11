@@ -338,4 +338,45 @@ h2 span{
     font-weight: bold;
 }
 
+div.date{
+    background-color: #fafafa;
+    font-family: Verdana, Arial;
+    color: black;
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    border: 1px solid gray;
+    width: 35px;
+}
 
+div.date span{
+    display:block;
+    background-color: #b8002e;
+    color: white;
+    font-size: .6em;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.timer_list li{
+    list-style-type: none;
+    margin: 5px;
+}
+
+.timer_list h3{
+    padding-left: 45px;
+    font-size: 1.7em;
+    margin-bottom: 0;
+}
+
+.timer_notice span {
+    padding-left: 5px;
+    color:#666666;
+    font-size:0.9em;
+    font-style:italic;
+    font-weight:bold;
+}
+
+textarea{
+    height: 50px;
+}

@@ -21,9 +21,26 @@ from profile.forms import LoginForm, RegisterForm, ProfileForm, UserForm, SetPas
 from common.shortcuts import render_response, render_string
 from profile.models import Profile, Registration
 
+def unconnected_view(request):
+    context = {}
+    form = LoginForm()
+    if Site._meta.installed:
+        current_site = Site.objects.get_current()
+    else:
+        current_site = RequestSite(request)
+    return render_response(request,'base_not_connected.html', {
+        'login_form': LoginForm(),
+        'register_form': RegisterForm(),
+        'site': current_site,
+        'site_name': current_site.name,
+    })
+    
+    
 def login_view(request, template_name='profile/login.html',redirect_field_name=REDIRECT_FIELD_NAME):
     context = {}
     redirect_to = request.REQUEST.get(redirect_field_name, '')
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/')
     if request.method == "POST":
         form = LoginForm(data=request.POST)
         if form.is_valid():
@@ -35,6 +52,8 @@ def login_view(request, template_name='profile/login.html',redirect_field_name=R
                 request.session.delete_test_cookie()
             return HttpResponseRedirect(redirect_to)
     else:
+        if request.session.get('tr_ids'):
+            template_name = 'base_not_connected.html'
         form = LoginForm(request)
     request.session.set_test_cookie()
     if Site._meta.installed:

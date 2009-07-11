@@ -92,5 +92,4 @@ INSTALLED_APPS = (
     'project',
     'task',
     'timer',
-    #'project',
 )

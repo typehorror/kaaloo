@@ -202,13 +202,17 @@ $('#stop_button').click(function(){
                 }
                 $('#stop_button').hide();
                 $('#start_button').show();
+                $('#open_time_item').remove();
                 $('#id_time_records').prepend('<li>' + data + '</li>');
+                
             });
 });
 
 $('.timer_list input[name=cancel]').live('click',function(){
     var place_holder_to_remove = $(this).parents('div.form_placeholder');
-    place_holder_to_remove.html('');    
+    place_holder_to_remove.hide('slow', function(){
+        place_holder_to_remove.html('');    
+    });    
 });
 
 $('.timer_list a').live('click',function(){
@@ -217,6 +221,7 @@ $('.timer_list a').live('click',function(){
     $.post(url, 
             function(data){
                 place_holder.html(data);
+                place_holder.show('slow');    
             })
 });
 

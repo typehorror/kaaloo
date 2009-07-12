@@ -1,10 +1,12 @@
+<div class="timer_item_container"{% if not time_record.stop_date %} id="open_time_item"{% endif %}>
 <div class="date" style="float: left;"><span>{{ time_record.start_date|date:'b' }}</span>{{ time_record.start_date|date:'d' }}</div>
 <div class="timer_notice">
     <h3 class="bottomline">
-        <a href="#" style="font-size: 0.6em; float:right;">edit</a>{{ time_record.title }}
+        <a href="#" style="font-size: 0.6em; float:right;">edit</a> {{ time_record.title }}
         <input type="hidden" name="time_id" value="{% url set_time_record time_record.id %}" />
     </h3>
-    <span>started at {{ time_record.start_date|date:'l H:i' }}{% if time_record.stop_date %}, ended at {{ time_record.stop_date|date:'H:i' }} - {{ time_record.start_date|timesince:time_record.stop_date }}{% endif %}</span>
-    <div class="form_placeholder"></div>
+    <span>started on {{ time_record.start_date|date:'l \a\t H:i' }}{% if time_record.stop_date %}, ended at {{ time_record.stop_date|date:'H:i' }} - {{ time_record.start_date|timesince:time_record.stop_date }}{% endif %}</span>
+    <div class="form_placeholder hide"></div>
 </div>
-<div class="clear">
+<div class="clear"></div>
+</div>

@@ -65,6 +65,7 @@ form .errorlist{
     font-family: "Warnock Pro","Goudy Old Style","Palatino","Book Antiqua",Georgia,serif;
 }
 
+input.red_button,
 input.button{
     background-color: #B2D17B;
     border-bottom: 1px solid #485E21;
@@ -73,8 +74,6 @@ input.button{
     border-left: 1px solid #DDEBC7;
     color: white;
     padding: 2px 5px 4px 5px;
-    //-moz-border-radius: 2px;
-    //-webkit-border-radius: 2px;
     height: 22px;
 }
 
@@ -86,6 +85,20 @@ input.button:active{
     border-left: 1px solid #485E21;
 }
 
+input.red_button{
+    background-color: #D17B86;
+    border-bottom: 1px solid #82303B;
+    border-top: 1px solid #E4B4BA;
+    border-right: 1px solid #82303B;
+    border-left: 1px solid #E4B4BA;
+}
+input.red_button:active{
+    background-color: #C35564;
+    border-bottom: 1px solid #E4B4BA;
+    border-right: 1px solid #E4B4BA;
+    border-top: 1px solid #82303B;
+    border-left: 1px solid #82303B;
+}
 
 
 /*** main placeholder ***/

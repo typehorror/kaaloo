@@ -18,6 +18,14 @@ def start_timer(request):
     time_record = TimeRecord.objects.get_time_record(request, auto_create=True)
     return HttpResponse('{seconds:%d, id:%d}' % (time_record.seconds,time_record.id), mimetype='text/javascript')
 
+def delete_timer(request, id):
+    time_record = TimeRecord.objects.get_time_record(request, id=int(id))
+    if time_record:
+        time_record.delete()
+        return HttpResponse('{result:true}', mimetype='text/javascript')
+    else:
+        return HttpResponse('{result:false}', mimetype='text/javascript')
+
 def set_time_record(request, id):
     time_record = TimeRecord.objects.get_time_record(request, id=int(id))
     

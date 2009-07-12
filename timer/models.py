@@ -54,8 +54,11 @@ class TimeRecord(models.Model):
 
     @property
     def seconds(self):
+        #import pdb; pdb.set_trace()
         if self.stop_date:
-            return ( self.stop_date - self.start_date).seconds
+            time_delta = self.stop_date - self.start_date
+            return time_delta.seconds + (time_delta.days * 24 * 3600)
         else:
-            return ( datetime.now() - self.start_date).seconds
+            time_delta = datetime.now() - self.start_date
+            return time_delta.seconds + (time_delta.days * 24 * 3600)
     

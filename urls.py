@@ -21,5 +21,7 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('django.views.generic.simple',
     (r'^$', 'redirect_to', {'url': '/profile/me/'}),
+    url(r'^privacy/$', 'direct_to_template', {'template': 'legal/privacy.html'}, name="privacy_policy"),
+    url(r'^tos/$', 'direct_to_template', {'template': 'legal/tos.html'}, name="terms_of_service"),
     )   
 

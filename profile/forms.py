@@ -8,6 +8,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.models import Site
 from django.utils.http import int_to_base36
 from django.template import Context, loader
+from django.core.urlresolvers import reverse
+from django.utils.safestring import mark_safe
 
 from common.shortcuts import render_string
 from profile.models import Profile, Registration
@@ -103,6 +105,21 @@ class SetPasswordForm(forms.Form):
             if password1 != password2:
                 raise forms.ValidationError(_("The two password fields didn't match."))
         return password2
+
+class SetPasswordFormWithAgreement(SetPasswordForm):
+    tos_agreement =  forms.BooleanField(required=False)
+    def __init__(self, *args, **kwargs):
+        super(SetPasswordFormWithAgreement, self).__init__(*args, **kwargs)
+        self.fields['tos_agreement'].label = mark_safe(_('I accept the <a href="%s" target="_blank">Terms of Service</a> and <a href="%s" target="_blank">Privacy Policy</a>') % (reverse('terms_of_service'),reverse('privacy_policy')) )
+
+    def clean_tos_agreement(self):
+        tos_agree = self.cleaned_data.get('tos_agreement')
+        if not tos_agree:
+            raise forms.ValidationError(_("You must accept the Terms of Service and Privacy Policies."))
+        return tos_agree
+        
+class SetPasswordFormWithAgreementCopyTimeRecord(SetPasswordFormWithAgreement):
+    backup_time_records =  forms.BooleanField(label=_("Backup existing time record"),required=False, initial=True)
 
 class PasswordResetForm(authforms.PasswordResetForm):
     def save(self, domain_override=None, email_template_name='registration/password_reset_email.html',

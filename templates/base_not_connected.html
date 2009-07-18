@@ -61,33 +61,14 @@
     <script type="text/javascript" src="{{ STATIC_URL}}js/jquery-1.3.2.min.js" ></script>
     <script type="text/javascript" src="{{ STATIC_URL}}js/jquery.overlabel.js" ></script>
     <script type="text/javascript" src="{{ STATIC_URL}}js/jquery.form.js" ></script>
+    <script type="text/javascript" src="{{ STATIC_URL}}js/timer.js" ></script>
     <script type="text/javascript">
     {% if TIME_RECORD %}
     var timer_start = new Date().getTime() - {{TIME_RECORD.seconds}}*1000; // start at 1 hour 5 min 33sec
     {% else %}
     var timer_start = new Date().getTime();
     {% endif %}
-    function time_from_second(seconds){
-        var hours = parseInt(seconds / 3600000);
-        var minutes = parseInt((seconds - hours * 3600000) / 60000);
-        var seconds = parseInt((seconds % 60000) / 1000);
-        if (hours < 10){ hours = "0" + hours;}
-        if (minutes < 10){ minutes = "0" + minutes;}
-        if (seconds < 10){ seconds = "0" + seconds;}
-        result = new Array();
-        result['hours'] = hours;
-        result['minutes'] = minutes;
-        result['seconds'] = seconds;
-        return result;
-    }
-        
-    function timer(){
-        var currentTime = new Date().getTime();
-        var delta = currentTime - timer_start;
-        result = time_from_second(delta)
-        $(".timer_place_holder").html(result['hours'] + ":" + result['minutes'] + ":" +  result['seconds']);
-        kaaloo_timer = setTimeout ("timer()", 1000 ); 
-    }
+    var kaaloo_timer = 0;
     </script>
     {% endblock %}
 
@@ -95,7 +76,8 @@
     $(document).ready(function() {
     {% block js_ready %}
     {% if TIME_RECORD %}
-        timer();
+        timer('.timer_place_holder');
+        kaaloo_timer = setInterval("timer('.timer_place_holder')",1000);
     {% endif %}
     $("label.overlabel").overlabel();
     {% endblock %}
@@ -143,18 +125,18 @@
 <div class="clear"></div>
     <div id="content">
     <h1>Warning: You are anonymous</h1>
-    <p>You're actually using kaaloo using your session cookie. It mean that your data can
-    be lost very easely (if you close your web browser, clear your cookies/session, after 14 days...)
+    <p>You are actually on kaaloo using your session cookie. It means that your data can
+    be lost very easely (if you clear your cookies/session, if you leave for 14 days...)
     To store your time records you can register, we will transfer them to your new account.
     Beeing a registered user offers you to manage your time record within a team, a project and a task. 
     To register enter your email at the top right corner of the page and click the register button.
     </p>
     {% if not user.is_authenticated %}
+    <ul class="timer_list span-24" id="id_time_records">
     {% for TR in TIME_RECORDS %}
-        {% if forloop.first %}<ul class="timer_list span-24" id="id_time_records">{% endif %}
         <li>{% timer_item TR %}</li>
-        {% if forloop.last %}</ul>{% endif %}
     {% endfor %}
+        </ul>
     {% endif %}
 {% block content %}{% endblock %}
     </div>
@@ -168,10 +150,10 @@
 		</div>
     
 		<div class="span-10 last right">
-            <a href="index.html">Sitemap</a> | 
-            <a href="index.html">Home</a> |
-	        <a href="index.html">Terms and conditions</a> |
-	        <a href="index.html">Privacy Policy</a>
+            <a href="/">Sitemap</a> | 
+            <a href="/">Home</a> |
+	        <a href="{% url terms_of_service %}">Terms and conditions</a> |
+	        <a href="{% url privacy_policy %}">Privacy Policy</a>
         </div>        
 	<!-- footer-bottom ends -->		
 	</div>
@@ -185,7 +167,8 @@ $('#start_button').click(function(){
             {},
             function(data){
                 timer_start = new Date().getTime() - data.seconds*1000;
-                timer();
+                timer('.timer_place_holder');
+                kaaloo_timer = setInterval("timer('.timer_place_holder')",1000);
                 $('#start_button').hide();
                 $('#stop_button').show();
             },
@@ -197,8 +180,8 @@ $('#stop_button').click(function(){
             {},
             function(data){
                 var timer_start = new Date().getTime() - data.seconds*1000;
-                if (kaaloo_timer!==undefined){
-                    clearTimeout(kaaloo_timer);
+                if (kaaloo_timer != 0){
+                    clearInterval(kaaloo_timer);
                 }
                 $('#stop_button').hide();
                 $('#start_button').show();

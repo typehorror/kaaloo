@@ -17,11 +17,15 @@ else:
     from django.core.mail import send_mail
 
 
-from profile.forms import LoginForm, RegisterForm, ProfileForm, UserForm, SetPasswordForm
+from profile.forms import LoginForm, RegisterForm, ProfileForm, UserForm, SetPasswordForm, SetPasswordFormWithAgreementCopyTimeRecord
 from common.shortcuts import render_response, render_string
 from profile.models import Profile, Registration
+from timer.models import TimeRecord
 
 def unconnected_view(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/')
+
     context = {}
     form = LoginForm()
     if Site._meta.installed:
@@ -52,8 +56,6 @@ def login_view(request, template_name='profile/login.html',redirect_field_name=R
                 request.session.delete_test_cookie()
             return HttpResponseRedirect(redirect_to)
     else:
-        if request.session.get('tr_ids'):
-            template_name = 'base_not_connected.html'
         form = LoginForm(request)
     request.session.set_test_cookie()
     if Site._meta.installed:
@@ -79,6 +81,9 @@ def register_confirm(request, key):
     if not registration:
         return HttpResponseRedirect(reverse('login_view'))
 
+    if request.user.is_authenticated():
+        logout(request)
+
     registration = registration[0]
 
     # check that user does not already exist with this email
@@ -86,13 +91,21 @@ def register_confirm(request, key):
         Registration.objects.filter(email__iexact=registration.email).delete()
         return HttpResponseRedirect(reverse('login_view'))
     context = {'registration': registration}
+
     if request.method == "POST":
-        form = SetPasswordForm(request.POST)
+        form = SetPasswordFormWithAgreementCopyTimeRecord(request.POST)
         if form.is_valid():
+            time_records = TimeRecord.objects.get_time_records(request)
             password = form.cleaned_data['password2']
             user = User.objects.create_user(sha_constructor(str(registration.email)).hexdigest()[:30], registration.email, password)
             profile = Profile.objects.create(user=user)
             user = authenticate(username=user.username, password=password)
+
+            if form.cleaned_data['backup_time_records']:
+                for time_record in time_records:
+                    time_record.user = user
+                    time_record.save()
+
             login(request, user)
             context['email_to'] = registration.email
             context['password'] = password
@@ -108,7 +121,7 @@ def register_confirm(request, key):
         else:
             context['password_form'] = form
     else:
-        context['password_form'] = SetPasswordForm()
+        context['password_form'] = SetPasswordFormWithAgreementCopyTimeRecord()
 
     return render_response(request, 'profile/create_account.html', context)
     

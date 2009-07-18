@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-   "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 {% load timer_tags %}
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Kaaloo</title>
 
     {% block css %}
@@ -17,12 +18,14 @@
     {% block headerscript %}
     {% endblock %}
 
-    <script type="text/javascript">
+<script type="text/javascript">
+if(typeof jQuery == 'function'){
     $(document).ready(function() {
     {% block js_ready %}
     {% endblock %}
     });
-    </script>
+}
+</script>
 
 </head>
 
@@ -58,10 +61,10 @@
 		</div>
     
 		<div class="span-10 last right">
-            <a href="index.html">Sitemap</a> | 
-            <a href="index.html">Home</a> |
-	        <a href="index.html">Terms and conditions</a> |
-	        <a href="index.html">Privacy Policy</a>
+            <a href="/">Sitemap</a> | 
+            <a href="/">Home</a> |
+	        <a href="{% url terms_of_service %}">Terms and conditions</a> |
+	        <a href="{% url privacy_policy %}">Privacy Policy</a>
         </div>        
 	<!-- footer-bottom ends -->		
 	</div>

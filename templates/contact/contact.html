@@ -1,5 +1,6 @@
 {% extends "contact/contact_base.html" %}
 {% load gravatar %}
+{% load profile_tags %}
 {% block sub_content %}
     <div>
 	     {% if contacts %}
@@ -8,7 +9,7 @@
 	        {% for contact in contacts %}
                 <li>
                 {% gravatar contact.user 40 %} 
-                <div><h3>{{ contact.name }}</h3><span>Dealing with things</span></div>
+                <div><h3>{{ contact.name }}</h3><span>{% user_status contact.user %}</span></div>
                 </li>
 		    {% endfor %}
 	        </ul>

@@ -97,15 +97,15 @@
     <input id="stop_button" type="button" class="button{% if not TIME_RECORD %} hide{% endif%}" value="stop" />
     <input id="start_button" type="button" class="button{% if TIME_RECORD %} hide{% endif%}" value="start" />
 </div>
-<div class="span-5">&nbsp;</div>
-<div class="span-8 login_form">
+<div class="span-3">&nbsp;</div>
+<div class="span-9 login_form">
 	    <form action="{% url login_view %}" method="post">
             <div id="login_username"><label for="id_email" class="overlabel">Email</label><input id="id_email" name="email" maxlength="128" type="text"></div>
             <div id="login_password"><label for="id_password" class="overlabel">Password</label><input id="id_password" name="password" maxlength="50" type="password"></div>
             <input type="submit" value="connect" class="button" />
 		</form>
 </div>
-<div class="span-5 last register_form">
+<div class="span-6 last register_form">
 	    <form action="{% url register_view %}" method="post">
             <div id="reg_username"><label for="id_reg_email" class="overlabel">Email</label><input id="id_reg_email" name="email" maxlength="75" type="text"></div>
 		    <input type="submit" value="register" class="button" />

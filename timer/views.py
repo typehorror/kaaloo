@@ -1,9 +1,87 @@
-from timer.models import TimeRecord
+from datetime import date, timedelta, datetime
+
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import Http404, HttpResponse
 from django.shortcuts import render_to_response
-from datetime import datetime
 
-from timer.forms import CloseTimeRecordForm, OpenTimeRecordForm
+from common.shortcuts import render_response
+
+from timer.models import TimeRecord
+from timer.forms import CloseTimeRecordForm, OpenTimeRecordForm, CustomTimeForm
+
+
+def paginate(records, page):
+    paginator = Paginator(records, 15)
+
+    try:
+        page = int(page)
+    except ValueError:
+        page = 1
+
+    try:
+        records = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        records = paginator.page(paginator.num_pages)
+    return records
+    
+
+@login_required
+def time_records_view(request):
+    time_records = paginate(TimeRecord.objects.get_time_records(request), 
+                            int(request.GET.get('page', '1')))
+
+    context = {'current':'times',
+               'time_records': time_records}
+    return render_response(request,'timer/time_records.html', context)
+
+@login_required
+def today_time_records_view(request):
+    kw_filter = { 'start_date__gte': date.today()}
+    time_records = paginate(TimeRecord.objects.get_time_records(request).filter(**kw_filter), 
+                            int(request.GET.get('page', '1')))
+    context = {'current':'times',
+               'time_records': time_records}
+    return render_response(request,'timer/time_records.html', context)
+
+@login_required
+def last_week_time_records_view(request):
+    kw_filter = {'start_date__gte': date.today() - timedelta(days=7)}
+    time_records = paginate(TimeRecord.objects.get_time_records(request).filter(**kw_filter), 
+                            int(request.GET.get('page', '1')))
+    context = {'current':'times',
+               'time_records': time_records}
+    return render_response(request,'timer/time_records.html', context)
+
+@login_required
+def yesterday_time_records_view(request):
+    kw_filter = { 'start_date__gte': date.today() - timedelta(days=1),
+                  'start_date__lt': date.today()}
+
+    time_records = paginate(TimeRecord.objects.get_time_records(request).filter(**kw_filter), 
+                            int(request.GET.get('page', '1')))
+    context = {'current':'times',
+               'time_records': time_records}
+    return render_response(request,'timer/time_records.html', context)
+
+@login_required
+def add_time_record_view(request):
+    context = {'current':'times'}
+    if request.POST:
+        form = CustomTimeForm(request.POST)
+        if form.is_valid():
+            import pdb; pdb.set_trace()
+            time_record = form.save(commit=False)
+            time_record.user = request.user
+            time_record.stop_date = datetime.today() + form.cleaned_data['time']
+            time_record.save()
+            context['added'] = True
+            context['form'] = CustomTimeForm()
+        else:
+            context['form'] = form
+    else:
+        context['form'] = CustomTimeForm()
+    return render_response(request,'timer/add_time_view.html', context)
 
 def stop_timer(request):
     time_record = TimeRecord.objects.get_time_record(request)

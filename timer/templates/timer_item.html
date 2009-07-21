@@ -1,4 +1,4 @@
-<div class="timer_item_container"{% if not time_record.stop_date %} id="open_time_item"{% endif %}>
+<div class="timer_item_container closed"{% if not time_record.stop_date %} id="open_time_item"{% endif %}>
 <div class="date" style="float: left;"><span>{{ time_record.start_date|date:'b' }}</span>{{ time_record.start_date|date:'d' }}</div>
 <div class="timer_notice">
     <h3 class="bottomline">

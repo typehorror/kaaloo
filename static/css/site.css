@@ -393,3 +393,23 @@ div.date span{
 textarea{
     height: 50px;
 }
+
+.time_record_list{
+    margin-top: 10px;
+}
+
+div.pagination{
+    margin: 5px;
+    text-align: right;
+    border-bottom: 1px dotted #eee;
+}
+
+.timer_item_container{
+    border: 1px white solid;
+    padding: 2px;
+}
+
+.timer_item_container.closed:hover{
+    border: 1px solid #96C0F8;
+    background-color: #F5F9FE;
+}

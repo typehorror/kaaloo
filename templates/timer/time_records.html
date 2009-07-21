@@ -1,0 +1,30 @@
+{% extends "timer/timer_base.html" %}
+{% load timer_tags %}
+{% block sub_content %}
+{% ifnotequal time_records.paginator.num_pages 1 %}
+<div class="pagination">
+    <span class="step-links">
+        {% if time_records.has_previous %}
+            <a href="?page={{ time_records.previous_page_number }}">previous</a> | 
+        {% endif %}
+
+        <span class="current">
+            Page {{ time_records.number }} of {{ time_records.paginator.num_pages }}
+        </span>
+
+        {% if time_records.has_next %}
+            | <a href="?page={{ time_records.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endifnotequal %}
+
+    <div class="time_record_list">
+        <ul id="id_time_records" class="timer_list">
+        {% for time_record in time_records.object_list %}
+            <li>{% timer_item time_record %}</li>
+        {% endfor %}
+        </ul>
+    </div>
+	<div class="clear"></div>
+{% endblock %}

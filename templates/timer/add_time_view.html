@@ -1,0 +1,13 @@
+{% extends "timer/timer_base.html" %}
+
+{% block sub_content %}
+    <div>
+	    <form action="{% url add_time_record_view %}" method="post" class="white wide">
+	        <h2>Add Time Record{% if added %} - <span>Successfully Added</span>{% endif %}</h2>
+	        {{ form.as_p }}
+		    <p class="right">
+		        <input type="submit" name="change_data" value="Add Time Record" class="button" />
+		    </p>
+		</form>
+	</div>
+{% endblock %}

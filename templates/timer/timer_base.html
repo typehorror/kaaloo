@@ -1,0 +1,28 @@
+{% extends "base_connected.html" %}
+{% block content %}
+{{ block.super }}
+	<div class="span-18 border">
+    {% block sub_content %}
+    {% endblock %}
+	</div>
+    <div id="right_nav" class="span-6 last">
+        <div id="gravatar"></div>
+        <div class="clear"></div>
+        <h2 class="nomargin bottomline">Shortcuts</h2>
+	    <ul class="nomargin">
+	        <li><a href="{% url today_time_records_view %}">Today</a></li>
+	        <li><a href="{% url time_records_view %}">All</a></li>
+	        <li><a href="{% url yesterday_time_records_view %}">Yesterday</a></li>
+	        <li><a href="{% url last_week_time_records_view %}">Last Week</a></li>
+	        <li><a href="{% url add_time_record_view %}">Add Custom Time Record</a></li>
+	    </ul>
+	</div>
+{% endblock %}
+{% block footerscript %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $('.notification h2 a').click(function(){
+            $(this).parents('div.notification').slideToggle("slow");
+        });
+    </script>
+{% endblock %}

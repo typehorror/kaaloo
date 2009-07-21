@@ -42,7 +42,7 @@
 {% block content %}
 <div id="nav" class="span-24">
     <ul>
-        <li class="first"{% ifequal current 'home' %} id="current"{% endifequal %}><a href="#">Home</a></li>
+        <li class="first"{% ifequal current 'times' %} id="current"{% endifequal %}><a href="{% url today_time_records_view %}">Times</a></li>
         <li{% ifequal current 'projects' %} id="current"{% endifequal %}><a href="style.html">Projects</a></li>
         <li{% ifequal current 'statistics' %} id="current"{% endifequal %}><a href="blog.html">Statistics</a></li>
         <li{% ifequal current 'archives' %} id="current"{% endifequal %}><a href="archives.html">Archives</a></li>
@@ -50,5 +50,67 @@
         <li{% ifequal current 'account' %} id="current"{% endifequal %}><a href="{% url profile_view %}">Profile</a></li>		
     </ul>		
 </div>
+{% endblock %}
+{% block footerscript %}
+<script type="text/javascript">
+$('#start_button').click(function(){
+    $.post("{% url start_timer %}", 
+            {},
+            function(data){
+                timer_start = new Date().getTime() - data.seconds*1000;
+                timer('.timer_place_holder');
+                kaaloo_timer = setInterval("timer('.timer_place_holder')",1000);
+                $('#start_button').hide();
+                $('#stop_button').show();
+            },
+            'json');
+});
+
+$('#stop_button').click(function(){
+    $.post("{% url stop_timer %}", 
+            {},
+            function(data){
+                var timer_start = new Date().getTime() - data.seconds*1000;
+                if (kaaloo_timer != 0){
+                    clearInterval(kaaloo_timer);
+                }
+                $('#stop_button').hide();
+                $('#start_button').show();
+                $('#open_time_item').remove();
+                $('#id_time_records').prepend('<li>' + data + '</li>');
+                
+            });
+});
+
+$('.timer_list input[name=cancel]').live('click',function(){
+    var place_holder_to_remove = $(this).parents('div.form_placeholder');
+    place_holder_to_remove.hide('slow', function(){
+        place_holder_to_remove.html('');
+        $(this).parents('.timer_item_container').addClass('closed');
+        $(this).parents('.timer_item_container').removeClass('open');
+    });    
+});
+
+$('.timer_item_container.closed').live('click',function(){
+    var url = $(this).find('input').val();
+    var place_holder = $(this).find('.form_placeholder');
+    var container = $(this);
+    $.post(url, 
+            function(data){
+                container.addClass('open');
+                container.removeClass('closed');
+                place_holder.html(data);
+                place_holder.show('slow');    
+            })
+});
+
+$('.timer_list form').live('submit',function(){
+    var li_position = $(this).parents('li');
+    $(this).ajaxSubmit(function(data){
+        li_position.html(data);
+    });
+    return false;
+});
+</script>
 {% endblock %}
 

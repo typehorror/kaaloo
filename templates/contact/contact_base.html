@@ -10,9 +10,9 @@
         <div class="clear"></div>
         <h2 class="nomargin bottomline">Shortcuts</h2>
 	    <ul class="nomargin">
-	        <li><a href="{% url contact_view %}">Your Contacts</a></li>
+	        <li><a href="{% url contact_view %}">Your Contacts ({{ user.get_profile.contacts.count }})</a></li>
+	        <li><a href="{% url contact_requests_view %}">Contact Requests ({{ user.contact_requests_received.count }})</a></li>
 	        <li><a href="{% url add_contact_view %}">Add Contacts</a></li>
-	        <li><a href="{% url contact_requests_view %}">Contact Requests</a></li>
 	    </ul>
 	</div>
 {% endblock %}

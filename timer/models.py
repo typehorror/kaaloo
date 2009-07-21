@@ -47,7 +47,7 @@ class TimeRecord(models.Model):
     title = models.CharField(max_length=50, default="untitled")
     description = models.TextField(blank=True, null=True)
     goals_achieved = models.ManyToManyField(Goal, null=True)
-    start_date = models.DateTimeField(auto_now_add=True)
+    start_date = models.DateTimeField(default=datetime.now)
     stop_date = models.DateTimeField(blank=True, null=True)
 
     objects = TimeRecordManager()

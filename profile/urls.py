@@ -8,6 +8,8 @@ urlpatterns = patterns('profile.views',
     url(r'^password/$', 'password_view', name='password_view'),
     url(r'^confirm/(?P<key>[0-9a-z\-]+)/$', 'register_confirm', name='register_confirm'),
     url(r'^anonymous/$', 'unconnected_view', name='unconnected_view'),
+    url(r'^thank_you/$', 'thank_you_for_registering', name='thank_you_for_registering'),
+    url(r'^sent/$', 'registration_sent', name='registration_sent'),
     #url(r'^accept_invitation/([\w-]+)/$', 'accept_invitation', name='profile_accept_invitation'),
 )
 

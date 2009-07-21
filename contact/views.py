@@ -40,6 +40,22 @@ def contact_requests_view(request):
     return render_response(request, 'contact/contact_requests.html', context)
     
 @login_required
+def contact_added(request):
+    """
+    view used for google analytics goals 
+    """
+    context = {'current':'contacts'}
+    return render_response(request, 'contact/contact_confirm_added.html', context)
+
+@login_required
+def contact_refused(request):
+    """
+    view used for google analytics goals 
+    """
+    context = {'current':'contacts'}
+    return render_response(request, 'contact/contact_confirm_refused.html', context)
+
+@login_required
 def contact_confirm_view(request, key):
     """
     
@@ -51,10 +67,10 @@ def contact_confirm_view(request, key):
         if request.POST.has_key('add_contact'):
             request.user.get_profile().contacts.add(contact_request.from_user.get_profile())
             contact_request.delete()
-            return render_response(request, 'contact/contact_confirm_added.html', context)
+            return HttpResponseRedirect(reverse('contact_added'))
         elif request.POST.has_key('refuse_contact'):
             contact_request.delete()
-            return render_response(request, 'contact/contact_confirm_refused.html', context)
+            return HttpResponseRedirect(reverse('contact_refused'))
         else:
             return HttpResponseRedirect(reverse('profile.views.profile_view'))
     
@@ -109,6 +125,11 @@ def invite_confirm_view(request, key):
         context['password_form'] = SetPasswordForm()
     return render_response(request, 'profile/create_account.html', context)
     
+@login_required
+def invite_sent(request):
+    context = {'current':'contacts'}
+    return render_response(request, 'contact/contact_invite_sent.html', context)
+
 @login_required
 def add_contact_view(request):
     context = {'current':'contacts'}
@@ -165,8 +186,7 @@ def add_contact_view(request):
                            settings.DEFAULT_EMAIL_FROM,
                            [email, ])
                 invite_request.save()
-            return render_response(request, 'contact/contact_invite_sent.html', context)
-
+            return HttpResponseRedirect(reverse('invite_sent'))
         else:
             context['contact_form'] = form
     else:

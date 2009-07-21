@@ -123,6 +123,11 @@ input.red_button:active{
     top: 35px;
 }
 
+#logo-text sup{
+    color: red;
+    font-size: .5em;
+}
+
 #slogan{
     position: absolute;
     top: 70px;

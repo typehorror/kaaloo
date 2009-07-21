@@ -71,6 +71,9 @@ def login_view(request, template_name='profile/login.html',redirect_field_name=R
     })
 login_view = never_cache(login_view)
 
+@login_required
+def thank_you_for_registering(request):
+    return render_response(request, 'profile/thank_you.html')
 
 def register_confirm(request, key):
     """
@@ -117,7 +120,7 @@ def register_confirm(request, key):
                       settings.DEFAULT_EMAIL_FROM,
                       [user.email, ])
             Registration.objects.filter(email__iexact=registration.email).delete()
-            return HttpResponseRedirect(reverse('profile_view'))
+            return HttpResponseRedirect(reverse('thank_you_for_registering'))
         else:
             context['password_form'] = form
     else:
@@ -125,6 +128,8 @@ def register_confirm(request, key):
 
     return render_response(request, 'profile/create_account.html', context)
     
+def registration_sent(request):
+    return render_response(request, 'profile/reg_email_sent.html')
 
 def register_view(request):
     """
@@ -144,7 +149,7 @@ def register_view(request):
                       text_content,
                       settings.DEFAULT_EMAIL_FROM,
                       [registration.email, ])
-            return render_response(request, 'profile/reg_email_sent.html', context)
+            return HttpResponseRedirect(reverse('registration_sent'))
         else:
             # form is invalid
             context['register_form'] = form

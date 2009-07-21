@@ -8,15 +8,15 @@ from task.models import Task, Goal
 class TimeRecordManager(models.Manager):
     def get_time_record(self, request, auto_create=False, id=None):
         if id is not None:
-            filter = {'id': id}
+            kw_filter = {'id': id}
         else:
-            filter = {'stop_date': None}
+            kw_filter = {'stop_date': None}
         if request.user.is_authenticated():
-            filter['user'] = request.user
+            kw_filter['user'] = request.user
         else:
-            filter['user'] = None
-            filter['pk__in'] = request.session.get('tr_ids',[]) or []
-        time_records = self.filter(**filter)
+            kw_filter['user'] = None
+            kw_filter['pk__in'] = request.session.get('tr_ids',[]) or []
+        time_records = self.filter(**kw_filter)
 
         if time_records:
             return time_records[0]

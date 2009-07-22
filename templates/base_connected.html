@@ -43,7 +43,7 @@
 <div id="nav" class="span-24">
     <ul>
         <li class="first"{% ifequal current 'times' %} id="current"{% endifequal %}><a href="{% url today_time_records_view %}">Times</a></li>
-        <li{% ifequal current 'projects' %} id="current"{% endifequal %}><a href="style.html">Projects</a></li>
+        <li{% ifequal current 'projects' %} id="current"{% endifequal %}><a href="{% url project_list_view %}">Projects</a></li>
         <li{% ifequal current 'statistics' %} id="current"{% endifequal %}><a href="blog.html">Statistics</a></li>
         <li{% ifequal current 'archives' %} id="current"{% endifequal %}><a href="archives.html">Archives</a></li>
         <li{% ifequal current 'contacts' %} id="current"{% endifequal %}><a href="{% url contact_view %}">Contacts</a></li>
@@ -53,6 +53,10 @@
 {% endblock %}
 {% block footerscript %}
 <script type="text/javascript">
+$('.notification h2 a').click(function(){
+    $(this).parents('div.notification').slideToggle("slow");
+});
+
 $('#start_button').click(function(){
     $.post("{% url start_timer %}", 
             {},

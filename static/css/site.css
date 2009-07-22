@@ -28,6 +28,14 @@ form {
     padding:15px 25px 0px;
 }
 
+form ul{
+    padding-left: 15em;
+}
+
+form li{
+    list-style-type: none;
+}
+
 form p label {
     width: 8em;
     float: left;

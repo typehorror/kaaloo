@@ -1,0 +1,13 @@
+{% extends 'project/project_base.html' %}
+
+{% block sub_content %}
+    <div>
+	    <form action="{% url add_project_view %}" method="post" class="white wide">
+	        <h2>Create New Project{% if project_saved %} - <span>Saved</span>{% endif %}</h2>
+	        {{ form.as_p }}
+		    <p class="right">
+		        <input type="submit" name="change_data" value="Save Project" class="button" />
+		    </p>
+		</form>
+	</div>
+{% endblock %}

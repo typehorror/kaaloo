@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.utils.hashcompat import sha_constructor
@@ -29,7 +29,6 @@ def contact_view(request):
     context = {'current':'contacts',
                'contacts': request.user.get_profile().contacts.all()}
     return render_response(request, 'contact/contact.html', context)
-    
     
 def contact_requests_view(request):
     """

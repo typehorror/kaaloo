@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.localflavor.us.models import USStateField
 
-from common.tools import get_uuid
+from common.tools import get_uuid, get_user_name
 
 STATE_CHOICES=(
 ('AL', 'Alabama'),
@@ -337,12 +337,7 @@ class Profile(models.Model):
     
     @property
     def name(self):
-        default_name = "%s %s" % (self.user.first_name, self.user.last_name)
-        if default_name.strip():
-            default_name = "%s - %s" % (default_name, self.user.email)
-        else:
-            default_name = self.user.email
-        return default_name.strip()
+        return get_user_name(self.user)
         
 class Registration(models.Model):
     email = models.EmailField()

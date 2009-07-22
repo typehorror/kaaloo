@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     (r'^contact/', include('contact.urls')),
     (r'^notification/', include('notification.urls')),
     (r'^timer/', include('timer.urls')),
+    (r'^project/', include('project.urls')),
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),

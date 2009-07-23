@@ -12,7 +12,7 @@ STATUS_CHOICES = (
 )
 
 class Task(models.Model):
-    project = models.ForeignKey(Project, null=True, blank=True)
+    project = models.ForeignKey(Project, related_name='project_tasks', null=True, blank=True)
     owners =  models.ManyToManyField(User, related_name='tasks')
     collaborators =  models.ManyToManyField(User, related_name='tasks_as_colaborator', null=True, blank=True, limit_choices_to = {'owners__contacts__user__is_active': 1})
     spectators = models.ManyToManyField(User, related_name='tasks_as_spectator', null=True, blank=True, limit_choices_to = {'owners__contacts__user__is_active': 1})

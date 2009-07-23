@@ -1,13 +1,75 @@
 {% extends 'project/project_base.html' %}
-
+{% load profile_tags %}
+{% load gravatar %}
+{% block headerscript %}
+{{ block.super }}
+<script type="text/javascript" src="{{ STATIC_URL}}js/thickbox-compressed.js"></script>
+{% endblock %}
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL}}css/thickbox.css" type="text/css" media="screen" />
+{% endblock %}
 {% block sub_content %}
     <div>
 	    <form action="{% url project_detail_view project.id %}" method="post" class="white wide">
 	        <h2>Project Detail - {{ project.title }} {% if project_saved %} - <span>Saved</span>{% endif %}</h2>
 	        {{ form.as_p }}
 		    <p class="right">
-		        <input type="submit" name="change_data" value="Save Project" class="button" />
+		        <input type="submit" name="change_data" value="Save Project Informations" class="button" />
 		    </p>
 		</form>
 	</div>
+	<hr />
+	<div class="span-6 border">
+	<h2>owners</h2>
+	{% for owner in project.owners.all %}
+	    {% user_detail owner %}
+	{% endfor %}
+	</div>
+
+	<div class="span-6 border">
+	<h2>collaborators</h2>
+	{% for collaborator in project.collaborators.all %}
+	    {% user_detail collaborator %}
+	{% endfor %}
+	</div>
+
+	<div class="span-6 last">
+	<h2>spectators</h2>
+	{% for spectator in project.spectators.all %}
+	    {% user_detail spectator %}
+	{% endfor %}
+
+	</div>
+
+	<div class="span-6 border">
+	<input type="button" value="Add owner" class="button" />
+    </div>
+	<div class="span-6 border">
+	<input type="button" value="Add collaborator" class="button" />
+    </div>
+	<div class="span-6 last">
+    <div id="myOnPageContent" class="hide">
+	<form action="" method="post">
+	<p>Please select who do you want to add to your project as spectator and click on add button.</p>
+	{{ spectator_form.spectators }}
+    <p>
+    <input type="button" class="button" value="add spectator"/>
+    </p>
+    </form>
+    </div>
+    <input alt="#TB_inline?height=300&width=400&inlineId=myOnPageContent" title="Add spectactor" type="button" value="Add spectator" class="button thickbox" />
+    </div>
+
+	<hr />
+	<div class="span-18">
+	<h2>Tasks</h2>
+	<ul>
+	{% for task in project.project_tasks.all %}
+	    <li>{{ task.title }} (<a href="#">remove</a>)</li>
+	{% endfor %}
+	</ul>
+	<input type="button" value="Add task" class="button" />
+	</div>
+
 {% endblock %}

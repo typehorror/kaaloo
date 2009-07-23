@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 
 from common.shortcuts import render_response, render_string
-from project.forms import ProjectForm, NewProjectForm
+from project.forms import ProjectForm, NewProjectForm, ProjectSpectatorForm
 from project.models import Project
 
 @login_required
@@ -29,6 +29,7 @@ def project_detail_view(request,id):
         context['form'] = form
     else:
         context['form'] = ProjectForm(instance=project)
+    context['spectator_form'] = ProjectSpectatorForm(instance=project, user=request.user)
     context['project'] = project
     return render_response(request, 'project/project_detail_view.html', context)
 

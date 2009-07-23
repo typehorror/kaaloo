@@ -1,0 +1,7 @@
+{% load gravatar %}
+{% load profile_tags %}
+<div style="display:block; margin-bottom: 3px;">        
+    <div style="float:left; margin-right:5px">{% gravatar user 35 %}</div>
+    <div style="display:block; font-weigth:bold;font-size:1.1em;">{% name_or_email user "23" %}</div>
+    <div style="color: #666; font-size: .8em;">{% user_status user "" %}</div>
+</div>

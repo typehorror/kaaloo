@@ -338,7 +338,7 @@ class Profile(models.Model):
     @property
     def name(self):
         return get_user_name(self.user)
-        
+                
 class Registration(models.Model):
     email = models.EmailField()
     key = models.CharField(max_length=55, unique=True, db_index=True, default=get_uuid)

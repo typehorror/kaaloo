@@ -25,14 +25,24 @@ class ProjectForm(forms.ModelForm):
         model = Project
         fields = ('title', 
                   'description',
-                  'owners',
-                  'collaborators',
-                  'spectators',
                   'status')
 
-    def __init__(self, *args, **kwargs):
-        super(ProjectForm, self).__init__(*args, **kwargs)
-        users = User.objects.filter(Q(profile__contacts__user = self.instance.owners.all())|Q(id=self.instance.owners.all())).distinct()
-        self.fields['owners'] = MyModelMultipleChoiceField(users,widget=forms.CheckboxSelectMultiple)
-        self.fields['collaborators'] = MyModelMultipleChoiceField(users,widget=forms.CheckboxSelectMultiple)
-        self.fields['spectators'] = MyModelMultipleChoiceField(users,widget=forms.CheckboxSelectMultiple)
+class ProjectOwnerForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ('owners',)
+
+class ProjectCollaboratorForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ('collaborators',)
+
+class ProjectSpectatorForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ('spectators',)
+    def __init__(self, user, *args, **kwargs):
+        super(ProjectSpectatorForm, self).__init__(*args, **kwargs)
+        profile = user.get_profile()
+        self.fields['spectators'] = MyModelMultipleChoiceField(queryset=User.objects.filter(profile__contacts=profile))
+        

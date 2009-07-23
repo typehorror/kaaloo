@@ -41,7 +41,7 @@ class CloseTimeRecordForm(forms.ModelForm):
         super(CloseTimeRecordForm, self).__init__(*args, **kwargs)
         if self.instance.stop_date:
             seconds = self.instance.seconds        
-            hours = int(seconds / 3600 )
+            hours = int(seconds / 3600)
             minutes = int((seconds - hours * 3600) / 60);
             seconds = int(seconds % 60);
             self.fields['time'] = forms.CharField(max_length=50,

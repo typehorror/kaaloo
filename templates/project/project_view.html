@@ -1,7 +1,7 @@
 {% extends 'project/project_base.html' %}
 {% load profile_tags %}
 {% block sub_content %}
-    <h2 class="content-title">Your Projects</h2>
+    <h2 class="content-title">{{ content_title }}</h2>
     <div>
         <ul class="project-list">
         {% for project in projects %}

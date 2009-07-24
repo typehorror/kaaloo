@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
+from django.utils.translation import ugettext as _
 
 from common.shortcuts import render_response, render_string
 from project.forms import ProjectForm, NewProjectForm, ProjectSpectatorForm
@@ -9,7 +10,8 @@ from project.models import Project
 
 @login_required
 def project_list_view(request):
-    context = {'current':'projects'}
+    context = {'current':'projects',
+               'content_title': _('All projects')}
     context['projects'] = Project.objects.for_user(request.user)
     return render_response(request, 'project/project_view.html', context)
 
@@ -40,6 +42,7 @@ def add_project_view(request):
         form = NewProjectForm(data=request.POST)
         if form.is_valid():
             project = form.save()
+            project.creator = request.user
             project.owners = [request.user]
             project.save()
             return HttpResponseRedirect(reverse('project_detail_view', args=[project.id]))
@@ -50,6 +53,7 @@ def add_project_view(request):
     return render_response(request, 'project/add_project.html', context)
 
 def my_projects_list_view(request):
-    context = {'current':'projects'}
+    context = {'current':'projects',
+               'content_title': _('Your projects')}
     context['projects'] = Project.objects.filter(owners=request.user)
     return render_response(request, 'project/project_view.html', context)

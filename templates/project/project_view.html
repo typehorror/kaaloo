@@ -1,10 +1,18 @@
 {% extends 'project/project_base.html' %}
-
+{% load profile_tags %}
 {% block sub_content %}
+    <h2 class="content-title">Your Projects</h2>
     <div>
-        <ul>
+        <ul class="project-list">
         {% for project in projects %}
-        <li>{{ project.title }} <a href="{% url project_detail_view project.id %}"> detail </a></li>
+        <li>
+        <div class="project-title">
+            <strong>{{ project.title }}</strong> - <a href="{% url project_detail_view project.id %}"> detail </a>
+        </div>
+        <div class="project-info">
+            started on {{ project.creation_date|date:"F d, Y"}} | status: {{ project.get_status_display }} | owners: {% for owner in project.owners.all %}<a href="#">{% name_or_email owner %}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+        </div>
+        </li>
         {% endfor %}
         <ul>
 	</div>

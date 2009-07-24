@@ -9,7 +9,7 @@ STATUS_CHOICES = (
 )
 class ProjectManager(models.Manager):
     def for_user(self, user):
-        return self.filter(Q(owners=user)|Q(collaborators=user)|Q(spectators=user))
+        return self.filter(Q(owners=user)|Q(collaborators=user)|Q(spectators=user)).distinct()
 
 class Project(models.Model):
     owners =  models.ManyToManyField(User, related_name='projects')

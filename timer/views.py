@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import Http404, HttpResponse
 from django.shortcuts import render_to_response
+from django.utils.translation import ugettext as _
 
 from common.shortcuts import render_response
 
@@ -12,7 +13,7 @@ from timer.forms import CloseTimeRecordForm, OpenTimeRecordForm, CustomTimeForm
 
 
 def paginate(records, page):
-    paginator = Paginator(records, 15)
+    paginator = Paginator(records, 10)
 
     try:
         page = int(page)
@@ -32,6 +33,7 @@ def time_records_view(request):
                             int(request.GET.get('page', '1')))
 
     context = {'current':'times',
+               'content_title': _('All times records'),
                'time_records': time_records}
     return render_response(request,'timer/time_records.html', context)
 
@@ -41,6 +43,7 @@ def today_time_records_view(request):
     time_records = paginate(TimeRecord.objects.get_time_records(request).filter(**kw_filter), 
                             int(request.GET.get('page', '1')))
     context = {'current':'times',
+               'content_title': _('Today times records'),
                'time_records': time_records}
     return render_response(request,'timer/time_records.html', context)
 
@@ -50,6 +53,7 @@ def last_week_time_records_view(request):
     time_records = paginate(TimeRecord.objects.get_time_records(request).filter(**kw_filter), 
                             int(request.GET.get('page', '1')))
     context = {'current':'times',
+               'content_title': _('Last week times records'),
                'time_records': time_records}
     return render_response(request,'timer/time_records.html', context)
 
@@ -61,6 +65,7 @@ def yesterday_time_records_view(request):
     time_records = paginate(TimeRecord.objects.get_time_records(request).filter(**kw_filter), 
                             int(request.GET.get('page', '1')))
     context = {'current':'times',
+               'content_title':  _('Yesterday records'),
                'time_records': time_records}
     return render_response(request,'timer/time_records.html', context)
 

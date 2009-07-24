@@ -1,21 +1,22 @@
 {% extends "timer/timer_base.html" %}
 {% load timer_tags %}
 {% block sub_content %}
+<h2 class="content-title">{{ content_title }}</h2>
 {% ifnotequal time_records.paginator.num_pages 1 %}
 <div class="pagination">
-    <span class="step-links">
+    <div style="float: left">
         {% if time_records.has_previous %}
-            <a href="?page={{ time_records.previous_page_number }}">previous</a> | 
+            <a href="?page={{ time_records.previous_page_number }}">&laquo; Newers Times</a> 
         {% endif %}
-
-        <span class="current">
-            Page {{ time_records.number }} of {{ time_records.paginator.num_pages }}
-        </span>
-
+    </div>
+    <div style="float: right">
         {% if time_records.has_next %}
-            | <a href="?page={{ time_records.next_page_number }}">next</a>
+            <a href="?page={{ time_records.next_page_number }}">Older Times &raquo;</a>
         {% endif %}
-    </span>
+    </div>
+    <div style="text-align: left; margin-left: 290px;">
+        <strong>Page {{ time_records.number }} of {{ time_records.paginator.num_pages }}</strong>
+    </div>
 </div>
 {% endifnotequal %}
 

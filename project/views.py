@@ -48,3 +48,8 @@ def add_project_view(request):
     else:
         context['form'] = NewProjectForm()
     return render_response(request, 'project/add_project.html', context)
+
+def my_projects_list_view(request):
+    context = {'current':'projects'}
+    context['projects'] = Project.objects.filter(owners=request.user)
+    return render_response(request, 'project/project_view.html', context)

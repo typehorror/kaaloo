@@ -143,10 +143,12 @@ input.red_button:active{
 }
 
 #nav{
-    font-size: 1.6em;
-    border-bottom: 1px dotted #eee;
+    font-size: 1.0em;
+    border-bottom: 1px solid #eee;
     padding: 0px;
     margin: 0px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 #header_link{
@@ -224,6 +226,8 @@ input[type="password"]:focus {
 /*** other ***/
 #nav a{
     color: #666;
+    padding: 5px 15px 10px;
+    display: block;
 }
 
 #nav a:hover{
@@ -237,22 +241,18 @@ input[type="password"]:focus {
 
 #nav li{
     list-style-type: none;
-    display: inline;
-    border-left: 1px dotted #eee;
-    padding: 5px 15px 0px;
-}
-
-#nav li:hover{
-    border-bottom: 4px solid #649BCE;
-    color: black;
+    float: left;
+    border-right: 1px solid #eee;
 }
 
 #nav li.first{
-    border-left: none;
+    border-left: 1px solid #eee;
+    margin-left: 15px;
 }
 
 #current{
-    border-bottom: 4px solid #649BCE;
+    #border-bottom: 4px solid #649BCE;
+    background: transparent url(../images/current.gif) repeat-x scroll left bottom
 }
 
 #current a{
@@ -425,4 +425,45 @@ div.pagination{
 .timer_item_container.closed:hover{
     border: 1px solid #96C0F8;
     background-color: #F5F9FE;
+}
+
+.project-title{
+    font-size:1.2em;
+    margin:0;
+    padding:0;
+}
+.project-info{
+    font-size:0.9em;
+    margin-left:0;
+    margin-top:0;
+}
+
+.project-list li{
+    list-style-type: none;
+    border-bottom: 1px dotted #eee;
+    padding: 10px 0px;
+    margin: 0;
+}
+
+div.pagination {
+    background-color:#F9F9F9;
+    border:1px solid #dadada;
+    padding:5px;
+    text-align:right;
+    margin: 5px 18px 0px;
+}
+
+.content-title{
+    font-size: 3.0em;
+    border-bottom: 1px solid #EBEBEB;
+    letter-spacing: -2px;
+    margin: 0 18px 0px;
+}
+
+.project_detail_users .button{
+    margin: 5px;
+}
+
+.project_detail_form{
+
 }

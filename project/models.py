@@ -9,10 +9,11 @@ STATUS_CHOICES = (
 )
 class ProjectManager(models.Manager):
     def for_user(self, user):
-        return self.filter(Q(owners=user)|Q(collaborators=user)|Q(spectators=user)).distinct()
+        return self.filter(Q(creator=user)|Q(owners=user)|Q(collaborators=user)|Q(spectators=user)).distinct()
 
 class Project(models.Model):
-    owners =  models.ManyToManyField(User, related_name='projects')
+    creator = models.ForeignKey(User, related_name='projects')
+    owners =  models.ManyToManyField(User, related_name='owned_projects')
     collaborators = models.ManyToManyField(User, related_name='projects_as_collaborator', null=True, blank=True)#, limit_choices_to = {'owners__contacts__user__is_active': 1})
     spectators = models.ManyToManyField(User, related_name='projects_as_spectator', null=True, blank=True)#, limit_choices_to = {'owners__contacts__user__is_active': 1})
     creation_date = models.DateTimeField(auto_now_add=True)

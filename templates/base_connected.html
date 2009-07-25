@@ -52,6 +52,7 @@
 </div>
 {% endblock %}
 {% block footerscript %}
+{{ block.super }}
 <script type="text/javascript">
 $('.notification h2 a').click(function(){
     $(this).parents('div.notification').slideToggle("slow");

@@ -11,6 +11,14 @@ class ProjectManager(models.Manager):
     def for_user(self, user):
         return self.filter(Q(creator=user)|Q(owners=user)|Q(collaborators=user)|Q(spectators=user)).distinct()
 
+    def write_access(self, user, id):
+        return self.filter(Q(creator=user)|Q(owners=user)).distinct().get(id=id)
+    
+    def get_for_user(self, user, id):
+        #import pdb; pdb.set_trace()
+        return self.filter(Q(creator=user)|Q(owners=user)|Q(collaborators=user)|Q(spectators=user)).distinct().get(id=id)
+    
+
 class Project(models.Model):
     creator = models.ForeignKey(User, related_name='projects')
     owners =  models.ManyToManyField(User, related_name='owned_projects')

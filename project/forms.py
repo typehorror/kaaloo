@@ -45,4 +45,4 @@ class ProjectSpectatorForm(forms.ModelForm):
         super(ProjectSpectatorForm, self).__init__(*args, **kwargs)
         profile = user.get_profile()
         self.fields['spectators'] = MyModelMultipleChoiceField(queryset=User.objects.filter(profile__contacts=profile))
-        
+

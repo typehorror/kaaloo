@@ -25,6 +25,16 @@ def name_or_email(user, max_char=None):
         return value[:int(max_char)-3] + '...'
     return value
 
+@register.simple_tag
+def name_and_email(user, max_char=None):
+    if user.first_name and user.last_name:
+        value = "%s %s - %s" % (user.first_name, user.last_name, user.email)
+    else:
+        value = user.email
+    if max_char and len(value) > int(max_char):
+        return value[:int(max_char)-3] + '...'
+    return value
+
 @register.inclusion_tag('user_detail.html')
 def user_detail(user):
     return {'user':user}

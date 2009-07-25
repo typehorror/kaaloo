@@ -96,6 +96,7 @@ margin-top: expression(0 - parseInt(this.offsetHeight / 2) + (TBWindowMargin = d
 	float:left;
 	padding:7px 0 5px 10px;
 	margin-bottom:1px;
+	font-weight: bold;
 }
 
 #TB_title{

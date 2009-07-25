@@ -1,0 +1,23 @@
+{% load profile_tags %}
+    <div id="add_collaborator_form">
+	<form action="{% url add_remove_collaborator project.id %}" method="post" class="dialog_form">
+	<p>
+	    Please select who do you want to add to your project as collaborator and click on add button.
+	</p>
+	<div class="contact_checkbox_dialog_form">
+	{% for collaborator in collaborators %}
+	<p>
+	    <input type="checkbox" value="{{ collaborator.id }}" name="already_collaborators" id="id_collaborator_{{ collaborator.id }}" checked="checked" /><label for="id_collaborator_{{ collaborator.id }}"> {% name_and_email collaborator %}</label>
+	</p>
+	{% endfor %}
+	{% for contact in new_collaborators %}
+	<p>
+	    <input type="checkbox" value="{{ contact.id }}" name="collaborators" id="id_contact_collaborators_{{ contact.id }}"/><label for="id_contact_collaborators_{{ contact.id }}"> {% name_and_email contact %}</label>
+	</p>
+	{% endfor %}
+    </div>
+    <p>
+    <input type="submit" class="button" value="add/remove collaborator" onclick="tb_remove()"/>
+    </p>
+    </form>
+    </div>

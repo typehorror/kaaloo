@@ -53,85 +53,19 @@
 
 
 	<div class="span-6 border">
-    <div id="add_owner_form" class="hide">
-	<form action="{% url add_remove_owner project.id %}" method="post" class="dialog_form">
-	<p>
-	    Please select who do you want to add to your project as owner and click on add button.
-	</p>
-	<div class="contact_checkbox_dialog_form">
-	{% for owner in owners %}
-	<p>
-	    <input type="checkbox" value="{{ owner.id }}" name="already_owners" id="id_owner_{{ owner.id }}" checked="checked" /><label for="id_owner_{{ owner.id }}"> {% name_and_email owner %}</label>
-	</p>
-	{% endfor %}
-	{% for contact in new_owners %}
-	<p>
-	    <input type="checkbox" value="{{ contact.id }}" name="owners" id="id_contact_owner_{{ contact.id }}"/><label for="id_contact_owner_{{ contact.id }}"> {% name_and_email contact %}</label>
-	</p>
-	{% endfor %}
-    </div>
-    <p>
-    <input type="submit" class="button" value="add/remove owner" onclick="tb_remove()"/>
-    </p>
-    </form>
-    </div>
-    <input alt="#TB_inline?height=300&width=400&inlineId=add_owner_form" title="Add and Remove Owners" type="button" value="add/remove owners" class="button thickbox" />
+    <input alt="{% url owner_form project.id %}?height=300&width=400" title="Add and Remove Owners" type="button" value="add/remove owners" class="button thickbox" />
     </div>
 
 
 
 	<div class="span-6 border">
-    <div id="add_collaborator_form" class="hide">
-	<form action="{% url add_remove_collaborator project.id %}" method="post" class="dialog_form">
-	<p>
-	    Please select who do you want to add to your project as collaborator and click on add button.
-	</p>
-	<div class="contact_checkbox_dialog_form">
-	{% for collaborator in collaborators %}
-	<p>
-	    <input type="checkbox" value="{{ collaborator.id }}" name="already_collaborators" id="id_collaborator_{{ collaborator.id }}" checked="checked" /><label for="id_collaborator_{{ collaborator.id }}"> {% name_and_email collaborator %}</label>
-	</p>
-	{% endfor %}
-	{% for contact in new_collaborators %}
-	<p>
-	    <input type="checkbox" value="{{ contact.id }}" name="collaborators" id="id_contact_collaborators_{{ contact.id }}"/><label for="id_contact_collaborators_{{ contact.id }}"> {% name_and_email contact %}</label>
-	</p>
-	{% endfor %}
-    </div>
-    <p>
-    <input type="submit" class="button" value="add/remove collaborator" onclick="tb_remove()"/>
-    </p>
-    </form>
-    </div>
-    <input alt="#TB_inline?height=300&width=400&inlineId=add_collaborator_form" title="Add and Temove Collaborators" type="button" value="add/remove collaborators" class="button thickbox" />
+    <input alt="{% url collaborator_form project.id %}?height=300&width=400" title="Add and Temove Collaborators" type="button" value="add/remove collaborators" class="button thickbox" />
     </div>
 
 
 
 	<div class="span-6 last">
-    <div id="add_spectator_form" class="hide">
-	<form action="{% url add_remove_spectator project.id %}" method="post" class="dialog_form">
-	<p>
-	    Please select who do you want to add to your project as spectator and click on add button.
-	</p>
-	<div class="contact_checkbox_dialog_form">
-	{% for spectator in spectators %}
-	<p>
-	    <input type="checkbox" value="{{ spectator.id }}" name="already_spectators" id="id_spectator_{{ spectator.id }}" checked="checked" /><label for="id_spectator_{{ spectator.id }}"> {% name_and_email spectator %}</label>
-	</p>
-	{% endfor %}
-	{% for contact in new_spectators %}
-	<p>
-	    <input type="checkbox" value="{{ contact.id }}" name="spectators" id="id_contact_spectator_{{ contact.id }}"/><label for="id_contact_spectator_{{ contact.id }}"> {% name_and_email contact %}</label>
-	</p>
-	{% endfor %}
-    </div>
-    <p>
-    <input type="submit" class="button" value="add/remove spectator" onclick="tb_remove()"/>
-    </p>
-    </form>
-    </div>
-    <input alt="#TB_inline?height=300&width=400&inlineId=add_spectator_form" title="Add and Remove Spectactors" type="button" value="add/remove spectators" class="button thickbox" />
+    <input alt="{% url spectator_form project.id %}?height=300&width=400" title="Add and Remove Spectactors" type="button" value="add/remove spectators" class="button thickbox" />
     </div>
 
     </div>
@@ -152,21 +86,21 @@
 {% block footerscript %}
 {{ block.super }}
 <script type="text/javascript">
-$('#add_spectator_form form').submit(function(){
+$('#add_spectator_form form').live('submit',function(){
     $(this).ajaxSubmit(function(data){
         $('#spectator_list').html(data);
     });
     return false;
 });
 
-$('#add_owner_form form').submit(function(){
+$('#add_owner_form form').live('submit',function(){
     $(this).ajaxSubmit(function(data){
         $('#owner_list').html(data);
     });
     return false;
 });
 
-$('#add_collaborator_form form').submit(function(){
+$('#add_collaborator_form form').live('submit',function(){
     $(this).ajaxSubmit(function(data){
         $('#collaborator_list').html(data);
     });

@@ -109,10 +109,10 @@ def add_project_view(request):
     if request.method == "POST":
         form = NewProjectForm(data=request.POST)
         if form.is_valid():
-            project = form.save()
+            project = form.save(commit=False)
             project.creator = request.user
-            project.owners = [request.user]
             project.save()
+            project.owners = [request.user]
             return HttpResponseRedirect(reverse('project_detail_view', args=[project.id]))
         else:
             context['form'] = form

@@ -26,7 +26,7 @@
     connected as <a href="{% url profile_view %}">{% if user.first_name %}{{ user.first_name }}{% if user.last_name %} {{ user.last_name }}{% endif %}{% else %}{{ user.email }}{% endif %}</a>
     | <a href="{% url logout_view %}" class="button">logout</a> 
 </div>
-<div id="gravatar">{% gravatar user 80 %}</div>
+<div id="gravatar" class="gravatar">{% gravatar user 80 %}</div>
 {{ block.super }}
 {% endblock %}
 {% block js_ready %}

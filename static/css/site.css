@@ -186,11 +186,14 @@ input.red_button:active{
     font-family: Georgia,'Times New Roman',Times,serif;
 }
 
-#gravatar img{
-    float: right;
+.gravatar img{
     background: white;
     border: 1px solid #eee;
     padding: 5px;
+}
+
+#gravatar img{
+    float: right;
     margin: 15px 35px 0;
 }
 
@@ -479,4 +482,26 @@ div.pagination {
 .contact_checkbox_dialog_form {
     height: 180px;
     overflow: auto;
+}
+
+h2.sub-content-title{
+    letter-spacing: -1px;
+    margin: 0 18px 0px;
+    border-bottom: 1px solid #eee;
+}
+
+div.sub-content{
+    margin: 0 18px 20px;
+}
+
+
+div.timer_title{
+    font-size: 1.5em;
+    font-family: georgia, serif;
+}
+
+div.project_item{
+    border-bottom: 1px dotted #eee;
+    margin-bottom: 2px;
+    padding-bottom: 2px;
 }

@@ -4,7 +4,7 @@ from profile.models import Profile, Registration
 class ProfileAdmin(admin.ModelAdmin):
     #search_fields = ( 'user__first_name', 'user__email', 'user__last_name', )
     list_filter = ( 'country',)
-    list_display = ( 'id', 'country', 'city')
+    list_display = ( 'id', 'country', 'city', 'user')
     
 admin.site.register(Profile, ProfileAdmin)
 

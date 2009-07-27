@@ -13,6 +13,7 @@
 	        <li><a href="{% url contact_view %}">Your Contacts ({{ user.get_profile.contacts.count }})</a></li>
 	        <li><a href="{% url contact_requests_view %}">Contact Requests ({{ user.contact_requests_received.count }})</a></li>
 	        <li><a href="{% url add_contact_view %}">Add Contacts</a></li>
+	        <li><a href="{% url contact_detail user.get_profile.id %}">Your Public Profile</a></li>
 	    </ul>
 	</div>
 {% endblock %}

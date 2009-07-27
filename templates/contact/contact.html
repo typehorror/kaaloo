@@ -9,7 +9,7 @@
 	        {% for contact in contacts %}
                 <li>
                 {% gravatar contact.user 40 %} 
-                <div><h3>{{ contact.name }}</h3><span>{% user_status contact.user %}</span></div>
+                <div><h3>{{ contact.name }}</h3><span>{% user_status contact.user %}</span> | <a href="{% url contact_detail contact.id %}">detail</a></div>
                 </li>
 		    {% endfor %}
 	        </ul>

@@ -9,4 +9,5 @@ urlpatterns = patterns('contact.views',
     url(r'^added/$', 'contact_added', name='contact_added'),
     url(r'^refused/$', 'contact_refused', name='contact_refused'),
     url(r'^sent/$', 'invite_sent', name='invite_sent'),
+    url(r'^detail/(?P<contact_id>\d+)/$', 'contact_detail', name='contact_detail'),
 )

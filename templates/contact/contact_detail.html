@@ -1,0 +1,42 @@
+{% extends "contact/contact_base.html" %}
+{% load gravatar %}
+{% load profile_tags %}
+{% load timer_tags %}
+{% load project_tags %}
+{% block sub_content %}
+    <h2 class="content-title">Contact details</h2>
+	<div class="sub-content">
+        <div style="display: block; margin-bottom: 3px;">
+                <div style="float: left; margin: 5px;" class="gravatar">{% gravatar contact.user 60 %}</div>
+                <div style="display: block; font-size: 2em;">{% name_or_email contact.user %}</div>
+                <div style="color: rgb(102, 102, 102); font-size: 1em;">{% user_status contact.user %}</div>
+                <div style="color: rgb(102, 102, 102); font-size: 1em;">Registered since {{ contact.user.date_joined|date:"l d F Y" }}</div>
+        </div>
+        </div>
+	<div class="clear"></div>
+
+    {% if time_records %}
+    <h2 class="sub-content-title"> {{ time_records.count }} last time record{{ time_records.count|pluralize }} </h2>
+	<div class="sub-content">
+	    {% for time_record in time_records %}
+	            {% timer_item time_record "read_only" %} 
+	    {% endfor %}
+    </div>
+    
+	<div class="clear"></div>
+    {% endif %}
+
+    {% if projects %}
+    <h2 class="sub-content-title"> Active project{{ projects.count|pluralize }} </h2>
+	<div class="sub-content">
+	{% for project in projects %}
+	    <div class="project_item">
+	    {% project_item project user %}
+        </div>
+    {% endfor %}
+    </div>
+    
+	<div class="clear"></div>
+    {% endif %}
+
+{% endblock %}

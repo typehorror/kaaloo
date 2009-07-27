@@ -5,7 +5,7 @@
 	    <form action="" method="post" class="white">
 	        <h2>Contact Request</h2>
 	        <p>
-	        <div class="gravatar" style="float: left; border: 1px solid #EEEEEE; padding: 5px; margin-right: 5px">{% gravatar contact_request.from_user 40 %}</div> Do you want to add {% if contact_request.from_user.first_name and contact_request.from_user.last_name %}{{ contact_request.from_user.first_name}} {{ contact_request.from_user.last_name }}{% endif %} {{ contact_request.from_user.email }}
+	        <div class="gravatar" style="float: left; margin-right: 5px">{% gravatar contact_request.from_user 40 %}</div> Do you want to add {% if contact_request.from_user.first_name and contact_request.from_user.last_name %}{{ contact_request.from_user.first_name}} {{ contact_request.from_user.last_name }}{% endif %} {{ contact_request.from_user.email }}
 	        to your contacts. When a user is one of your contact you can start sharing projects,
 	        tasks and informations according to your privacy policy.
 	        </p>

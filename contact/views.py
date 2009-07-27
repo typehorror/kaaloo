@@ -23,7 +23,20 @@ from contact.forms import AddContactForm
 from contact.models import ContactRequest, InviteRequest
 from profile.forms import SetPasswordForm
 from profile.models import Profile
+from project.models import Project
 
+@login_required
+def contact_detail(request, contact_id):
+    if int(contact_id) == request.user.get_profile().id:
+        contact = request.user.get_profile()
+    else:
+        contact = get_object_or_404(Profile, id=contact_id, contacts__user=request.user)
+    context = {'current':'contacts',
+               'time_records': contact.user.time_records.order_by('-stop_date')[:5],
+               'projects': Project.objects.for_user(contact.user),
+               'contact': contact }
+    return render_response(request, 'contact/contact_detail.html', context)
+    
 @login_required
 def contact_view(request):
     context = {'current':'contacts',

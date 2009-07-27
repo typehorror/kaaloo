@@ -463,6 +463,10 @@ div.pagination {
     margin: 0 18px 0px;
 }
 
+.project_detail_users{
+    margin-bottom: 20px;
+}
+
 .project_detail_users .button{
     margin: 5px;
 }

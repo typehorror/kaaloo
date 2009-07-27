@@ -32,3 +32,15 @@ class Project(models.Model):
     title = models.CharField(max_length=50)
 
     objects = ProjectManager()
+
+    def is_creator(self, user):
+        return user == self.creator
+
+    def is_admin(self, user):
+        return self.is_creator(user) or user in self.owners.all()
+    
+    def is_collaborator(self, user):
+        return self.is_admin(user) or user in self.collaborators.all()
+
+    def is_spectator(self, user):
+        return self.is_admin(user) or self.is_collaborator(user) or user in self.spectator.all()

@@ -39,41 +39,49 @@ def project_detail_view(request,id):
     context['collaborators'] = project.collaborators.all().select_related()
     context['new_spectators'] = User.objects.filter(profile__contacts__user=request.user).exclude(projects_as_spectator = project).select_related()
     context['new_collaborators'] = User.objects.filter(profile__contacts__user=request.user).exclude(projects_as_collaborator = project).select_related()
+    context['is_creator'] = project.is_creator(request.user)
+    context['is_admin'] = project.is_admin(request.user)
     context['new_owners'] = User.objects.filter(profile__contacts__user=request.user).exclude(owned_projects = project).select_related()
 
     return render_response(request, 'project/project_detail_view.html', context)
 
 @login_required
 def owner_form(request, project_id):
-    project = Project.objects.write_access(user=request.user, id=int(project_id))
-    context = {'project': project}
-    context['owners'] = project.owners.all().select_related()
-    context['new_owners'] = User.objects.filter(profile__contacts__user=request.user).exclude(owned_projects = project).select_related()
-    return render_response(request, 'project/owner_form.html', context)
+    project = Project.objects.get_for_user(user=request.user, id=int(project_id))
+    if project.is_creator(request.user):
+        context = {'project': project}
+        context['owners'] = project.owners.all().select_related()
+        context['new_owners'] = User.objects.filter(profile__contacts__user=request.user).exclude(owned_projects = project).select_related()
+        return render_response(request, 'project/owner_form.html', context)
+    raise Http404
 
 
 @login_required
 def spectator_form(request, project_id):
-    project = Project.objects.write_access(user=request.user, id=int(project_id))
-    context = {'project': project}
-    context['spectators'] = project.spectators.all().select_related()
-    context['new_spectators'] = User.objects.filter(profile__contacts__user=request.user).exclude(projects_as_spectator = project).select_related()
-    return render_response(request, 'project/spectator_form.html', context)
+    project = Project.objects.get_for_user(user=request.user, id=int(project_id))
+    if project.is_admin(request.user):
+        context = {'project': project}
+        context['spectators'] = project.spectators.all().select_related()
+        context['new_spectators'] = User.objects.filter(profile__contacts__user=request.user).exclude(projects_as_spectator = project).select_related()
+        return render_response(request, 'project/spectator_form.html', context)
+    raise Http404
 
 
 @login_required
 def collaborator_form(request, project_id):
-    project = Project.objects.write_access(user=request.user, id=int(project_id))
-    context = {'project': project}
-    context['collaborators'] = project.collaborators.all().select_related()
-    context['new_collaborators'] = User.objects.filter(profile__contacts__user=request.user).exclude(projects_as_collaborator = project).select_related()
-    return render_response(request, 'project/collaborator_form.html', context)
+    project = Project.objects.get_for_user(user=request.user, id=int(project_id))
+    if project.is_admin(request.user):
+        context = {'project': project}
+        context['collaborators'] = project.collaborators.all().select_related()
+        context['new_collaborators'] = User.objects.filter(profile__contacts__user=request.user).exclude(projects_as_collaborator = project).select_related()
+        return render_response(request, 'project/collaborator_form.html', context)
+    raise Http404
 
 
 @login_required
 def add_remove_spectator(request, project_id):
-    project = Project.objects.write_access(user=request.user, id=int(project_id))
-    if request.POST:
+    project = Project.objects.get_for_user(user=request.user, id=int(project_id))
+    if request.POST and project.is_admin(request.user):
         already_spectators = request.POST.getlist('already_spectators')
         spectators = request.POST.getlist('spectators')
         users = list(User.objects.values_list('id', flat=True).filter(Q(projects_as_spectator=project,id__in=already_spectators)|Q(profile__contacts__user=request.user, id__in=spectators)|Q(profile__contacts__user=request.user, id__in=already_spectators)).distinct())
@@ -83,8 +91,8 @@ def add_remove_spectator(request, project_id):
 
 @login_required
 def add_remove_owner(request, project_id):
-    project = Project.objects.get(creator=request.user, id=int(project_id))
-    if request.POST:
+    project = Project.objects.get_for_user(user=request.user, id=int(project_id))
+    if request.POST and project.is_creator(request.user):
         already_owners = request.POST.getlist('already_owners')
         owners = request.POST.getlist('owners')
         users = list(User.objects.values_list('id', flat=True).filter(Q(owned_projects=project,id__in=already_owners)|Q(profile__contacts__user=request.user, id__in=owners)|Q(profile__contacts__user=request.user, id__in=already_owners)).distinct())
@@ -94,8 +102,8 @@ def add_remove_owner(request, project_id):
 
 @login_required
 def add_remove_collaborator(request, project_id):
-    project = Project.objects.write_access(user=request.user, id=int(project_id))
-    if request.POST:
+    project = Project.objects.get_for_user(user=request.user, id=int(project_id))
+    if request.POST and project.is_admin(request.user):
         already_collaborators = request.POST.getlist('already_collaborators')
         collaborators = request.POST.getlist('collaborators')
         users = list(User.objects.values_list('id', flat=True).filter(Q(projects_as_collaborator=project,id__in=already_collaborators)|Q(profile__contacts__user=request.user, id__in=collaborators)|Q(profile__contacts__user=request.user, id__in=already_collaborators)).distinct())

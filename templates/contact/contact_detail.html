@@ -4,7 +4,7 @@
 {% load timer_tags %}
 {% load project_tags %}
 {% block sub_content %}
-    <h2 class="content-title">Contact details</h2>
+<div class="contact_detail">
 	<div class="sub-content">
         <div style="display: block; margin-bottom: 3px;">
                 <div style="float: left; margin: 5px;" class="gravatar">{% gravatar contact.user 60 %}</div>
@@ -38,5 +38,5 @@
     
 	<div class="clear"></div>
     {% endif %}
-
+</div>
 {% endblock %}

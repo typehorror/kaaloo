@@ -506,6 +506,26 @@ div.timer_title{
 
 div.project_item{
     border-bottom: 1px dotted #eee;
-    margin-bottom: 2px;
+    margin-top: 2px;
     padding-bottom: 2px;
+}
+
+.project_icon{
+    float: left;
+    margin-right: 5px;
+    background-image: url(../images/project.png);
+    width: 35px;
+    height: 35px;
+}
+
+.task_icon{
+    float: left;
+    margin-right: 5px;
+    background-image: url(../images/task.png);
+    width: 35px;
+    height: 35px;
+}
+
+.contact_detail{
+    margin-top: 20px;
 }

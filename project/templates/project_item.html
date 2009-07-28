@@ -1,4 +1,5 @@
 {% load profile_tags %}
+<div class="project_icon"> &nbsp;</div>
 <div class="project-title">
     <strong>{{ project.title }}</strong>{% if not read_only %} - <a href="{% url project_detail_view project.id %}"> detail </a>{% endif %}
 </div>

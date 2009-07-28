@@ -444,7 +444,7 @@ div.pagination{
 .project-list li{
     list-style-type: none;
     border-bottom: 1px dotted #eee;
-    padding: 10px 0px;
+    padding: 5px 0px;
     margin: 0;
 }
 
@@ -500,8 +500,7 @@ div.sub-content{
 
 
 div.timer_title{
-    font-size: 1.5em;
-    font-family: georgia, serif;
+    font-size: 1.2em;
 }
 
 div.project_item{

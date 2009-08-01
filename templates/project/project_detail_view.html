@@ -21,7 +21,7 @@
 	</div>
 
     <div class="project_detail_users">
-	<div class="span-6 border">
+	<div class="span-6">
 	<h2>owners</h2>
 	<div id="owner_list">
 	{% for owner in project.owners.all %}
@@ -30,7 +30,7 @@
 	</div>
 	</div>
 
-	<div class="span-6 border">
+	<div class="span-6">
 	<h2>collaborators</h2>
 	<div id="collaborator_list">
 	{% for collaborator in project.collaborators.all %}
@@ -52,7 +52,7 @@
 
 
 
-	<div class="span-6 border">
+	<div class="span-6">
 	{% if is_creator %}
     <input alt="{% url owner_form project.id %}?height=300&width=400" title="Add and Remove Owners" type="button" value="add/remove owners" class="button thickbox" />
     {% else %}&nbsp;
@@ -61,7 +61,7 @@
 
 
 
-	<div class="span-6 border">
+	<div class="span-6">
 	{% if is_admin %}
     <input alt="{% url collaborator_form project.id %}?height=300&width=400" title="Add and Remove Collaborators" type="button" value="add/remove collaborators" class="button thickbox" />
     {% else %}&nbsp;
@@ -76,6 +76,7 @@
     {% else %}&nbsp;
     {% endif %}
     </div>
+	<div class="clear"></div>
 
     </div>
 

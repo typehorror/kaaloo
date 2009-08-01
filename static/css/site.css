@@ -465,6 +465,7 @@ div.pagination {
 
 .project_detail_users{
     margin-bottom: 20px;
+    background: url(../images/span18by3.png) repeat-y 0 0;
 }
 
 .project_detail_users .button{

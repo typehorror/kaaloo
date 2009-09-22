@@ -1,0 +1,8 @@
+<form action="{% url set_time_record time_record.id %}" method="post">
+{{ form.as_p }}
+<p class="right">
+    {% if time_record.stop_date %}<span style="float: left"><input type="button" value="Delete" class="red_button" /><input type="hidden" name="delete_url" value="{% url delete_timer time_record.id %}"></span>{% endif %}
+    <input type="button" name="cancel" value="Cancel" class="button" />
+    <input type="submit" value="Update" class="button" />
+</p>
+</form>

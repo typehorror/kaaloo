@@ -1,0 +1,10 @@
+{% block body %}{% endblock %}
+
+--
+(c) 2009 kaaloo.com, All rights reserved.
+--
+{% block legal %}We hope you found this message to be useful. However, if you'd rather not receive future e-mails of this sort please notify the sender.
+To ensure continued receipt of message from kaaloo , please add {% if email_from %}{{ email_from }}{% else %}{{ DEFAULT_EMAIL_FROM }}{% endif %} to your address book.
+Please note that this message was sent to the following e-mail address: {{ email_to }}
+{% endblock %}
+

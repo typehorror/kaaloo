@@ -1,0 +1,31 @@
+{% extends "timer/timer_base.html" %}
+{% load timer_tags %}
+{% block sub_content %}
+<h2 class="content-title">{{ content_title }}</h2>
+{% ifnotequal time_records.paginator.num_pages 1 %}
+<div class="pagination">
+    <div style="float: left">
+        {% if time_records.has_previous %}
+            <a href="?page={{ time_records.previous_page_number }}">&laquo; Newers Times</a> 
+        {% endif %}
+    </div>
+    <div style="float: right">
+        {% if time_records.has_next %}
+            <a href="?page={{ time_records.next_page_number }}">Older Times &raquo;</a>
+        {% endif %}
+    </div>
+    <div style="text-align: left; margin-left: 290px;">
+        <strong>Page {{ time_records.number }} of {{ time_records.paginator.num_pages }}</strong>
+    </div>
+</div>
+{% endifnotequal %}
+
+    <div class="time_record_list">
+        <ul id="id_time_records" class="timer_list">
+        {% for time_record in time_records.object_list %}
+            <li>{% timer_item time_record %}</li>
+        {% endfor %}
+        </ul>
+    </div>
+	<div class="clear"></div>
+{% endblock %}

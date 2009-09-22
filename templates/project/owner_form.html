@@ -1,0 +1,24 @@
+{% load profile_tags %}
+    <div id="add_owner_form">
+	<form action="{% url add_remove_owner project.id %}" method="post" class="dialog_form">
+	<p>
+	    Please select who do you want to add to your project as owner and click on add button.
+	</p>
+	<div class="contact_checkbox_dialog_form">
+	{% for owner in owners %}
+	<p>
+	    <input type="checkbox" value="{{ owner.id }}" name="already_owners" id="id_owner_{{ owner.id }}" checked="checked" /><label for="id_owner_{{ owner.id }}"> {% name_and_email owner %}</label>
+	</p>
+	{% endfor %}
+	{% for contact in new_owners %}
+	<p>
+	    <input type="checkbox" value="{{ contact.id }}" name="owners" id="id_contact_owner_{{ contact.id }}"/><label for="id_contact_owner_{{ contact.id }}"> {% name_and_email contact %}</label>
+	</p>
+	{% endfor %}
+    </div>
+    <p>
+    <input type="hidden" value="owners" name="category" />
+    <input type="submit" class="button" value="add/remove owner" onclick="tb_remove()"/>
+    </p>
+    </form>
+    </div>

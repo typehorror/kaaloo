@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+{% load timer_tags %}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Kaaloo - alpha</title>
+
+    {% block css %}
+  <!-- Framework CSS -->
+    <link rel="stylesheet" href="{{ STATIC_URL}}css/screen.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="{{ STATIC_URL}}css/print.css" type="text/css" media="print" />
+  <!--[if lt IE 8]><link rel="stylesheet" href="{{ STATIC_URL}}css/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+    <link rel="stylesheet" href="{{ STATIC_URL}}css/site.css" type="text/css" />
+    <link rel="shortcut icon" href="{{STATIC_URL}}images/favicon.ico" />
+    {% endblock %}
+    {% block headerscript %}
+    {% endblock %}
+
+<script type="text/javascript">
+if(typeof jQuery == 'function'){
+    $(document).ready(function() {
+    {% block js_ready %}
+    {% endblock %}
+    });
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+	<!--header -->
+	<div id="header">
+	{% if not user.is_authenticated %}
+<div id="header_actions" class="span-14">
+    <a href="{% url unconnected_view %}" style="color: white; font-size: 1.4em;text-decoration: underline;">click here to use kaaloo without registering</a>
+</div>
+    {% endif %}
+        {% block header %}
+	    <h1 id="logo-text"><a href="{% url profile_view %}" title="">KaaLoo</a> <sup>alpha</sup></h1>		
+		<p id="slogan" class="alt">Keep track of your time... </p>	
+        {% endblock %}
+    </div>
+	<!--header ends -->
+
+	<!-- content starts -->		
+    <div id="content">
+{% block content %}{% endblock %}
+    </div>
+	<!-- content ends -->		
+
+	<!-- footer-bottom starts -->		
+    <div class="clear"></div>
+	<div id="footer-bottom">	    
+		<div class="span-14">
+			&copy; 2009 <strong>Kaaloo</strong>
+		</div>
+    
+		<div class="span-10 last right">
+            <a href="/">Sitemap</a> | 
+            <a href="/">Home</a> |
+	        <a href="{% url terms_of_service %}">Terms and conditions</a> |
+	        <a href="{% url privacy_policy %}">Privacy Policy</a>
+        </div>        
+	<!-- footer-bottom ends -->		
+	</div>
+	
+<!-- wrap ends here -->
+</div>
+{% block footerscript %}
+{% endblock %}
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-6379814-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends "contact/contact_base.html" %}
+{% load gravatar %}
+{% block sub_content %}
+    <div>
+	     {% if contact_requests %}
+	        <h2 class="content-title">Contact Requests you received</h2>
+
+	        {% for contact_request in contact_requests %}
+        	<div class="contact_request_item">
+	            <h2> {% gravatar contact_request.from_user 25 %} 
+	    
+                {% if contact_request.from_user.first_name %}
+                    {{ contact_request.from_user.first_name }}
+                {% endif %}
+                {% if contact_request.from_user.last_name %}
+                    {{ contact_request.from_user.last_name }} -
+                {% endif %}
+                {{ contact_request.from_user.email }}
+
+        	    <a href="{% url  contact_confirm_view contact_request.key %}">details</a></h2>
+	            <p class="contact_request_item-info">Request sended on {{ contact_request.creation_date|date:"l d F Y" }} </p>
+        	</div>
+		    {% endfor %}
+
+		{% else %}
+        <div class="message_box">
+            <h2>You don't have any contact request</h2>
+            <p> 
+            Nobody sent you a contact request or you already validated or refused all of them.
+            </p>
+        </div>
+	<div class="clear"></div>
+	    {% endif %}
+	</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% load profile_tags %}
+<div class="project_icon"> &nbsp;</div>
+<div class="project-title">
+    <strong>{{ project.title }}</strong>{% if not read_only %} - <a href="{% url project_detail_view project.id %}"> detail </a>{% endif %}
+</div>
+<div class="project-info">
+    started on {{ project.creation_date|date:"F d, Y"}} | {{ project.get_status_display }} | creator: <a href="{% url contact_detail project.creator.get_profile.id %}">{% name_or_email project.creator %}</a> | owners: {% for owner in project.owners.all %}<a href="{% url contact_detail owner.get_profile.id %}">{% name_or_email owner %}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+</div>

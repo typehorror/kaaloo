@@ -1,0 +1,14 @@
+{% extends 'project/project_base.html' %}
+{% load project_tags %}
+{% block sub_content %}
+    <h2 class="content-title">{{ content_title }}</h2>
+    <div>
+        <ul class="project-list">
+        {% for project in projects %}
+        <li>
+        {% project_item project user %}
+        </li>
+        {% endfor %}
+        <ul>
+	</div>
+{% endblock %}

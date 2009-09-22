@@ -1,0 +1,125 @@
+{% extends 'project/project_base.html' %}
+{% load profile_tags %}
+{% load gravatar %}
+{% block headerscript %}
+{{ block.super }}
+<script type="text/javascript" src="{{ STATIC_URL}}js/thickbox-compressed.js"></script>
+{% endblock %}
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{{ STATIC_URL}}css/thickbox.css" type="text/css" media="screen" />
+{% endblock %}
+{% block sub_content %}
+    <div class="project_detail_form">
+	    <form action="{% url project_detail_view project.id %}" method="post" class="white wide">
+	        <h2>Project Detail - {{ project.title }} {% if project_saved %} - <span>Saved</span>{% endif %}</h2>
+	        {{ form.as_p }}
+		    <p class="right">
+		        <input type="submit" name="change_data" value="Save Project Informations" class="button" />
+		    </p>
+		</form>
+	</div>
+
+    <div class="project_detail_users">
+	<div class="span-6">
+	<h2>owners</h2>
+	<div id="owner_list">
+	{% for owner in project.owners.all %}
+	    {% user_detail owner %}
+	{% endfor %}
+	</div>
+	</div>
+
+	<div class="span-6">
+	<h2>collaborators</h2>
+	<div id="collaborator_list">
+	{% for collaborator in project.collaborators.all %}
+	    {% user_detail collaborator %}
+	{% endfor %}
+	</div>
+	</div>
+
+	<div class="span-6 last">
+	<h2>spectators</h2>
+	<div id="spectator_list">
+	{% for spectator in project.spectators.all %}
+	    {% user_detail spectator %}
+	{% endfor %}
+	</div>
+	</div>
+
+	<div class="clear"></div>
+
+
+
+	<div class="span-6">
+	{% if is_creator %}
+    <input alt="{% url owner_form project.id %}?height=300&width=400" title="Add and Remove Owners" type="button" value="add/remove owners" class="button thickbox" />
+    {% else %}&nbsp;
+    {% endif %}
+    </div>
+
+
+
+	<div class="span-6">
+	{% if is_admin %}
+    <input alt="{% url collaborator_form project.id %}?height=300&width=400" title="Add and Remove Collaborators" type="button" value="add/remove collaborators" class="button thickbox" />
+    {% else %}&nbsp;
+    {% endif %}
+    </div>
+
+
+
+	<div class="span-6 last">
+	{% if is_admin %}
+    <input alt="{% url spectator_form project.id %}?height=300&width=400" title="Add and Remove Spectactors" type="button" value="add/remove spectators" class="button thickbox" />
+    {% else %}&nbsp;
+    {% endif %}
+    </div>
+	<div class="clear"></div>
+
+    </div>
+
+	<div class="span-18">
+	<h2>Tasks</h2>
+	<ul>
+	{% for task in project.project_tasks.all %}
+	    <li>{{ task.title }} (<a href="#">remove</a>)</li>
+	{% endfor %}
+	</ul>
+	<input type="button" value="Add task" class="button" />
+	</div>
+
+{% endblock %}
+
+
+{% block footerscript %}
+{{ block.super }}
+<script type="text/javascript">
+{% if is_creator %}
+$('#add_owner_form form').live('submit',function(){
+    $(this).ajaxSubmit(function(data){
+        $('#owner_list').html(data);
+    });
+    return false;
+});
+{% endif %}
+
+{% if is_admin %}
+$('#add_spectator_form form').live('submit',function(){
+    $(this).ajaxSubmit(function(data){
+        $('#spectator_list').html(data);
+    });
+    return false;
+});
+
+$('#add_collaborator_form form').live('submit',function(){
+    $(this).ajaxSubmit(function(data){
+        $('#collaborator_list').html(data);
+    });
+    return false;
+});
+{% endif %}
+
+</script>
+{% endblock %}

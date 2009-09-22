@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <div  class="prepend-6 span-12 append-6">
+        <div class="message_box">
+            <h2>Thank you and welcome to Kaaloo !</h2>
+            <p> 
+            You are now registered. You can now visite your <a href="{% url profile_view %}">
+            profile page</a> or directly go to your <a href="{% url time_records_view %}">time records
+            </a>.
+            </p>
+            <p class="alt right large">
+            the Kaaloo team.
+            </p>
+        </div>
+	<div class="clear"></div>
+{% endblock %}

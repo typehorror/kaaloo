@@ -1,0 +1,19 @@
+{% extends "contact/contact_base.html" %}
+{% load gravatar %}
+{% block sub_content %}
+    <div>
+	    <form action="" method="post" class="white">
+	        <h2>Contact Request</h2>
+	        <p>
+	        <div class="gravatar" style="float: left; margin-right: 5px">{% gravatar contact_request.from_user 40 %}</div> Do you want to add {% if contact_request.from_user.first_name and contact_request.from_user.last_name %}{{ contact_request.from_user.first_name}} {{ contact_request.from_user.last_name }}{% endif %} {{ contact_request.from_user.email }}
+	        to your contacts. When a user is one of your contact you can start sharing projects,
+	        tasks and informations according to your privacy policy.
+	        </p>
+		    <p class="right">
+		        <input type="submit" name="add_contact" value="Add Contact" class="button" />
+		        <input type="submit" name="refuse_contact" value="Refuse" class="button" />
+		        <input type="submit" name="cancel" value="Cancel" class="button" />
+		    </p>
+		</form>
+	</div>
+{% endblock %}

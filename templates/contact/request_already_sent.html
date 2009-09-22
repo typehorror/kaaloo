@@ -1,0 +1,17 @@
+{% extends "contact/contact_base.html" %}
+{% block sub_content %}
+    <div>
+        <div class="message_box">
+            <h2>Request has not been sent</h2>
+            <p> 
+            {% if message %}
+                {{message }}
+            {% else %}
+                You already create a request to this person. We recommand you to contact directly
+                this person.
+            {% endif %}
+            </p>
+        </div>
+	<div class="clear"></div>
+	</div>
+{% endblock %}

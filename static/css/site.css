@@ -1,0 +1,533 @@
+/*** elements ***/
+body {
+	background-image: url(/static/images/bg.gif);
+	background-repeat: repeat-x;
+	color: #444;
+    font-family: 'Lucida Grande','Lucida Sans Unicode',Geneva,Verdana,Sans-Serif;
+}
+
+h1,h2,h3,h4,h5,h6{
+	color: #444;
+    font-family: Georgia,'Times New Roman',Times,serif;
+}
+
+a{
+    text-decoration: none;
+    color: #649BCE;
+}
+
+a:hover{
+    color: #333333;
+}
+
+
+form {
+    background:#F8F8F8 none repeat scroll 0 0;
+    border:1px solid #F0F0F0;
+    margin:10px 20px;
+    padding:15px 25px 0px;
+}
+
+form ul{
+    padding-left: 15em;
+}
+
+form li{
+    list-style-type: none;
+}
+
+form p label {
+    width: 8em;
+    float: left;
+    margin: 0.5em 0;
+    color:#444;
+}
+
+form .errorlist{
+    color: red;
+    list-style-type: none;
+    padding: 5px 10px 5px 30px;
+    border: 1px solid #B30030;
+    background: #FFE5EC url(/static/images/red_arrow.png) no-repeat scroll 5px center;
+}
+
+/*** styler ***/
+.nomargin{margin:0;}
+.nopadding{padding:0;}
+.bottomline{border-bottom: 1px dotted #eee;}
+.right{
+    text-align: right;
+}
+
+.left{
+    text-align: left;
+}
+
+.center{
+    text-align: center;
+}
+
+.alt{
+    color: #666666;
+    font-style: italic;
+    font-family: "Warnock Pro","Goudy Old Style","Palatino","Book Antiqua",Georgia,serif;
+}
+
+input.red_button,
+input.button{
+    background-color: #B2D17B;
+    border-bottom: 1px solid #485E21;
+    border-top: 1px solid #DDEBC7;
+    border-right: 1px solid #485E21;
+    border-left: 1px solid #DDEBC7;
+    color: white;
+    padding: 2px 5px 4px 5px;
+    height: 22px;
+}
+
+input.button:active{
+    background-color: #A6CA68;
+    border-bottom: 1px solid #DDEBC7;
+    border-right: 1px solid #DDEBC7;
+    border-top: 1px solid #485E21;
+    border-left: 1px solid #485E21;
+}
+
+input.red_button{
+    background-color: #D17B86;
+    border-bottom: 1px solid #82303B;
+    border-top: 1px solid #E4B4BA;
+    border-right: 1px solid #82303B;
+    border-left: 1px solid #E4B4BA;
+}
+input.red_button:active{
+    background-color: #C35564;
+    border-bottom: 1px solid #E4B4BA;
+    border-right: 1px solid #E4B4BA;
+    border-top: 1px solid #82303B;
+    border-left: 1px solid #82303B;
+}
+
+
+/*** main placeholder ***/
+#footer-bottom{
+    border-top: 1px dotted #eee;
+}
+
+#content{
+    min-height:400px;
+}
+#content h1{
+    border-bottom: 1px solid #eee;
+    padding-left: 15px;
+}
+
+#header{
+    height: 120px;
+}
+
+#logo-text{
+    position: absolute;
+    top: 35px;
+}
+
+#logo-text sup{
+    color: red;
+    font-size: .5em;
+}
+
+#slogan{
+    position: absolute;
+    top: 70px;
+    font-size: 1.4em;
+}
+
+#nav{
+    font-size: 1.0em;
+    border-bottom: 1px solid #eee;
+    padding: 0px;
+    margin: 0px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#header_link{
+    font-size: 1.5em;
+    color: #ccc;
+}
+
+#header_link a{
+    color: white;
+}
+
+#header_timer{
+    font-size: 1.7em;
+    color: white;
+    font-family: Georgia,'Times New Roman',Times,serif;
+}
+
+#header_actions{
+    margin-top: 5px;
+}
+
+#header_link a{
+    color: white;
+}
+
+#header_link a:hover{
+    text-decoration: underline;
+}
+
+#right_nav ul{
+    margin-left: 0;
+}
+
+#right_nav h2{
+    font-family: Georgia,'Times New Roman',Times,serif;
+}
+
+.gravatar img{
+    background: white;
+    border: 1px solid #eee;
+    padding: 5px;
+}
+
+#gravatar img{
+    float: right;
+    margin: 15px 35px 0;
+}
+
+#gravatar p{
+    font-size: 1em;
+    font-family: Georgia,'Times New Roman',Times,serif;
+}
+
+#right_nav li{
+    padding: 10px 0px;
+    margin: 0;
+    font-weight: bold;
+    list-style-type: none;
+    border-bottom: 1px dotted #eee;
+}
+
+
+/*** Blueprint Transformer ***/
+div.colborder, div.border{
+    border-style: dotted;
+}
+
+input[type="password"] {
+    background-color:#FFFFFF;
+    border:1px solid #BBBBBB;
+    margin: 0.5em 0;
+}
+
+input[type="password"]:focus {
+    border-color: #666666;
+}
+
+/*** other ***/
+#nav a{
+    color: #666;
+    padding: 5px 15px 5px;
+    display: block;
+}
+
+#nav a:hover{
+    color: black;
+}
+
+#nav ul{
+    padding: 0;
+    margin: 0;
+}
+
+#nav li{
+    list-style-type: none;
+    float: left;
+    border-right: 1px solid #eee;
+}
+
+#nav li.first{
+    border-left: 1px solid #eee;
+    margin-left: 15px;
+}
+
+#current{
+    #border-bottom: 4px solid #649BCE;
+    background: transparent url(../images/current.gif) repeat-x scroll left bottom
+}
+
+#current a{
+    color: black;
+}
+
+form.white {
+    background: none;
+    border: none;
+    padding: 5px;
+    margin: 0;
+}
+form.white h2{
+    border-bottom: 1px solid #eee;
+}
+
+form.wide label{
+    width: 16em;
+}
+
+h2 span{
+    color: #B2D17B;
+}
+
+.message_box{
+    background-color:#F5F9FE;
+    border:1px solid #67A6F6;
+    margin: 20px;
+    padding: 5px;
+}
+
+.notification{
+    background-color:#F4F8ED;
+    border:1px solid #B2D17B;
+    margin: 10px 10px;
+    padding: 5px;
+    position: relative;
+}
+
+.contact_request_item{
+    background-color:#eee;
+    border:1px solid #bbb;
+    margin: 10px 10px;
+    padding: 5px;
+    position: relative;
+}
+
+.contact_request_item h2 a,
+.notification h2 a{
+    position: absolute;
+    right: 10px;
+}
+
+.notification h2 a{
+    font-size: .6em;
+    top:0px;
+}
+
+.contact_request_item h2,
+.notification h2{
+    font-size: 1.8em;
+    margin: 0px 5px;
+}
+.notification h2 img{
+    float: left;
+    background-color: white;
+    padding: 1px;
+    border: 1px solid #666;
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.contact_request_item p,
+.notification p{
+    margin: 5px;
+}
+
+.contact_request_item p.contact_request_item-info,
+.notification p.notification-info{
+    font-size: .9em;
+    font-weight: bold;
+    color: #777;
+    margin: 0px 5px;
+    border-top: 1px solid #777;
+}
+
+.contact_list li{
+    list-style-type: none;
+    border-bottom: 1px dotted #eee;
+    height: 48px;
+    margin-top: 5px;
+}
+
+.contact_list h3{
+    font-size: 1.7em;
+    margin-bottom: 0;
+}
+
+.contact_list img{
+    float: left;
+    margin-right: 5px;
+    border: 1px solid black;
+    padding: 1px;
+    border: 1px solid #666;
+}
+.contact_list span{
+    font-size: .9em;
+    color: #666;
+    font-style: italic;
+    font-weight: bold;
+}
+
+div.date{
+    background-color: #fafafa;
+    font-family: Verdana, Arial;
+    color: black;
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    border: 1px solid gray;
+    width: 35px;
+}
+
+div.date span{
+    display:block;
+    background-color: #b8002e;
+    color: white;
+    font-size: .6em;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.timer_list li{
+    list-style-type: none;
+    margin: 5px;
+}
+
+.timer_list h3{
+    padding-left: 45px;
+    font-size: 1.7em;
+    margin-bottom: 0;
+}
+
+.timer_notice span {
+    padding-left: 5px;
+    color:#666666;
+    font-size:0.9em;
+    font-style:italic;
+    font-weight:bold;
+}
+
+textarea{
+    height: 50px;
+}
+
+.time_record_list{
+    margin-top: 10px;
+}
+
+div.pagination{
+    margin: 5px;
+    text-align: right;
+    border-bottom: 1px dotted #eee;
+}
+
+.timer_item_container{
+    border: 1px white solid;
+    padding: 2px;
+}
+
+.timer_item_container.closed:hover{
+    border: 1px solid #96C0F8;
+    background-color: #F5F9FE;
+}
+
+.project-title{
+    font-size:1.2em;
+    margin:0;
+    padding:0;
+}
+.project-info{
+    font-size:0.9em;
+    margin-left:0;
+    margin-top:0;
+}
+
+.project-list li{
+    list-style-type: none;
+    border-bottom: 1px dotted #eee;
+    padding: 5px 0px;
+    margin: 0;
+}
+
+div.pagination {
+    background-color:#F9F9F9;
+    border:1px solid #dadada;
+    padding:5px;
+    text-align:right;
+    margin: 5px 18px 0px;
+}
+
+.content-title{
+    font-size: 3.0em;
+    border-bottom: 1px solid #EBEBEB;
+    letter-spacing: -2px;
+    margin: 0 18px 0px;
+}
+
+.project_detail_users{
+    margin-bottom: 20px;
+    background: url(../images/span18by3.png) repeat-y 0 0;
+}
+
+.project_detail_users .button{
+    margin: 5px;
+}
+
+.project_detail_form{
+
+}
+
+.dialog_form label{
+    float: none;
+}
+.dialog_form p{
+    margin: 0;
+    padding: 0;
+}
+
+.contact_checkbox_dialog_form {
+    height: 180px;
+    overflow: auto;
+}
+
+h2.sub-content-title{
+    letter-spacing: -1px;
+    margin: 0 18px 0px;
+    border-bottom: 1px solid #eee;
+}
+
+div.sub-content{
+    margin: 0 18px 20px;
+}
+
+
+div.timer_title{
+    font-size: 1.2em;
+}
+
+div.project_item{
+    border-bottom: 1px dotted #eee;
+    margin-top: 2px;
+    padding-bottom: 2px;
+}
+
+.project_icon{
+    float: left;
+    margin-right: 5px;
+    background-image: url(../images/project.png);
+    width: 35px;
+    height: 35px;
+}
+
+.task_icon{
+    float: left;
+    margin-right: 5px;
+    background-image: url(../images/task.png);
+    width: 35px;
+    height: 35px;
+}
+
+.contact_detail{
+    margin-top: 20px;
+}

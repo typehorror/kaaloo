@@ -1,0 +1,13 @@
+{% extends "contact/contact_base.html" %}
+{% block sub_content %}
+    <div>
+        <div class="message_box">
+            <h2>You accepted the request</h2>
+            <p> 
+            The contact request has been validated. You should now be able to see this user in
+            <a href="{% url contact_view %}">Your contacts</a> page.
+            </p>
+        </div>
+	<div class="clear"></div>
+	</div>
+{% endblock %}

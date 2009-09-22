@@ -1,0 +1,10 @@
+{% extends "email/body.txt" %}
+{% block body %}
+Hello,
+    You received this email because you submit your email to the registration process of kaaloo.
+    Kaaloo allow you to keep track of you task and time within a team and contact.
+    To validate your registration click on the link below:
+    http://{{ SITE_URL }}{{ registration.get_absolute_url }}
+    
+    
+{% endblock %}

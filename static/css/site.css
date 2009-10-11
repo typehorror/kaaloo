@@ -112,6 +112,7 @@ input.red_button:active{
 /*** main placeholder ***/
 #footer-bottom{
     border-top: 1px dotted #eee;
+    height: 30px;
 }
 
 #content{

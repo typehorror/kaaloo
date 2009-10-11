@@ -255,8 +255,7 @@ input[type="password"]:focus {
 }
 
 #current{
-    #border-bottom: 4px solid #649BCE;
-    background: transparent url(../images/current.gif) repeat-x scroll left bottom
+    background: transparent url(../images/current.gif) repeat-x scroll left bottom;
 }
 
 #current a{
@@ -541,8 +540,9 @@ div.project_item{
 }
 
 #id_task_title_form input{
-    color: gray
+    color: gray;
 }
+
 #id_task_title_form input:focus{
     color: black;
 }

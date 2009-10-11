@@ -335,6 +335,10 @@ class Profile(models.Model):
     country = models.CharField(max_length=4, choices=COUNTRY_CHOICES, blank=True)
     contacts = models.ManyToManyField('self', blank=True, symmetrical=True)
     
+    @models.permalink
+    def get_absolute_url(self):
+        return ('contact.views.contact_detail', [self.pk])
+
     @property
     def name(self):
         return get_user_name(self.user)

@@ -30,7 +30,10 @@ def contact_detail(request, contact_id):
     if int(contact_id) == request.user.get_profile().id:
         contact = request.user.get_profile()
     else:
-        contact = get_object_or_404(Profile, id=contact_id, contacts__user=request.user)
+        if request.user.is_staff:
+            contact = get_object_or_404(Profile, id=contact_id)
+        else:
+            contact = get_object_or_404(Profile, id=contact_id, contacts__user=request.user)
     context = {'current':'contacts',
                'time_records': contact.user.time_records.order_by('-stop_date')[:5],
                'projects': Project.objects.for_user(contact.user),

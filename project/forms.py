@@ -1,12 +1,11 @@
 from django import forms
 from django.utils.translation import ugettext as _
 from django.conf import settings
-from django.db.models import Q
 
 
 from common.tools import get_user_name
 
-from project.models import Project
+from models import Project
 from django.contrib.auth.models import User
 
 class MyModelMultipleChoiceField(forms.ModelMultipleChoiceField):

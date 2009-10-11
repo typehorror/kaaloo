@@ -44,3 +44,6 @@ class Project(models.Model):
 
     def is_spectator(self, user):
         return self.is_admin(user) or self.is_collaborator(user) or user in self.spectator.all()
+
+    def __unicode__(self):
+        return self.title

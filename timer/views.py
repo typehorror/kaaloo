@@ -9,7 +9,7 @@ from django.utils.translation import ugettext as _
 from common.shortcuts import render_response
 
 from timer.models import TimeRecord
-from timer.forms import CloseTimeRecordForm, OpenTimeRecordForm, CustomTimeForm
+from timer.forms import CloseTimeRecordForm, OpenTimeRecordForm, CustomTimeForm, TimeRecordTitleForm
 
 
 def paginate(records, page):
@@ -75,7 +75,6 @@ def add_time_record_view(request):
     if request.POST:
         form = CustomTimeForm(request.POST)
         if form.is_valid():
-            import pdb; pdb.set_trace()
             time_record = form.save(commit=False)
             time_record.user = request.user
             time_record.stop_date = datetime.today() + form.cleaned_data['time']
@@ -132,3 +131,16 @@ def set_time_record(request, id):
         else:
             form = OpenTimeRecordForm(instance=time_record)
         return render_to_response('timer/timer_item_form.html', {'form': form, 'time_record':time_record})
+
+@login_required
+def set_actual_time_record_title(request):
+    """
+    Set the actual opened time record title.
+    """
+    time_record = TimeRecord.objects.get_time_record(request)
+    if request.POST:
+        form = TimeRecordTitleForm(request.POST, instance=time_record, prefix="task")
+        if form.is_valid():
+            time_record = form.save()
+            return HttpResponse(time_record.title, mimetype="text/plain")
+    raise Http404

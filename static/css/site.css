@@ -532,3 +532,19 @@ div.project_item{
 .contact_detail{
     margin-top: 20px;
 }
+
+#id_task_title_form{
+    border: none;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+#id_task_title_form input{
+    color: gray
+}
+#id_task_title_form input:focus{
+    color: black;
+}
+
+

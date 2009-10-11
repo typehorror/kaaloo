@@ -65,6 +65,10 @@ class CloseTimeRecordForm(forms.ModelForm):
             raise forms.ValidationError(_("Please enter duration in format 12:34:56 ."))
 
         
+class TimeRecordTitleForm(forms.ModelForm):
+    class Meta:
+        model = TimeRecord
+        fields = ('title',)
           
 class OpenTimeRecordForm(forms.ModelForm):
     class Meta:

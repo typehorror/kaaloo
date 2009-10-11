@@ -17,11 +17,15 @@
 
 {% block header %}
 <div id="header_timer" class="span-3 timer_place_holder">00:00:00</div>
+<div class="span-4">
+<form id="id_task_title_form" action="{% url set_actual_time_record_title %}" method="post"{% if not TIME_RECORD %} class="hide"{% endif%}>
+<input type="text" id="id_task-title" value="{% if TIME_RECORD.title %}{{ TIME_RECORD.title }}{% else %}untitled{% endif %}" name="task-title" />
+<form>
+</div>
 <div id="header_actions" class="span-3">
     <input id="stop_button" type="button" class="button{% if not TIME_RECORD %} hide{% endif%}" value="stop" />
     <input id="start_button" type="button" class="button{% if TIME_RECORD %} hide{% endif%}" value="start" />
 </div>
-<div class="span-4">&nbsp;</div>
 <div id="header_link" class="right span-14 last">
     connected as <a href="{% url profile_view %}">{% if user.first_name %}{{ user.first_name }}{% if user.last_name %} {{ user.last_name }}{% endif %}{% else %}{{ user.email }}{% endif %}</a>
     | <a href="{% url logout_view %}" class="button">logout</a> 
@@ -36,6 +40,12 @@
         kaaloo_timer = setInterval("timer('.timer_place_holder')",1000);
     {% endif %}
     $("label.overlabel").overlabel();
+    $("#id_task_title_form").submit(function(){
+        $(this).ajaxSubmit({target: "#id_task_title"})
+        $("#id_task-title").blur();
+        return false;
+    });
+
 {% endblock %}
 
 
@@ -65,6 +75,7 @@ $('#start_button').click(function(){
                 timer_start = new Date().getTime() - data.seconds*1000;
                 timer('.timer_place_holder');
                 kaaloo_timer = setInterval("timer('.timer_place_holder')",1000);
+                $('#id_task_title_form').show();
                 $('#start_button').hide();
                 $('#stop_button').show();
             },
@@ -81,6 +92,7 @@ $('#stop_button').click(function(){
                 }
                 $('#stop_button').hide();
                 $('#start_button').show();
+                $('#id_task_title_form').hide();
                 $('#open_time_item').remove();
                 $('#id_time_records').prepend('<li>' + data + '</li>');
                 

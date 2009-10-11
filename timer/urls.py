@@ -10,5 +10,6 @@ urlpatterns = patterns('timer.views',
     url(r'^yesterday/$', 'yesterday_time_records_view', name='yesterday_time_records_view'),
     url(r'^last_week/$', 'last_week_time_records_view', name='last_week_time_records_view'),
     url(r'^add/$', 'add_time_record_view', name='add_time_record_view'),
+    url(r'^set_title/$', 'set_actual_time_record_title', name='set_actual_time_record_title'),
 )
 

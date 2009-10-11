@@ -20,7 +20,7 @@
 <div class="span-4">
 <form id="id_task_title_form" action="{% url set_actual_time_record_title %}" method="post"{% if not TIME_RECORD %} class="hide"{% endif%}>
 <input type="text" id="id_task-title" value="{% if TIME_RECORD.title %}{{ TIME_RECORD.title }}{% else %}untitled{% endif %}" name="task-title" />
-<form>
+</form>
 </div>
 <div id="header_actions" class="span-3">
     <input id="stop_button" type="button" class="button{% if not TIME_RECORD %} hide{% endif%}" value="stop" />

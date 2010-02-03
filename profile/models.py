@@ -342,6 +342,9 @@ class Profile(models.Model):
     @property
     def name(self):
         return get_user_name(self.user)
+
+    def __unicode__(self):
+        return "%s %s (%s)" % (self.user.first_name, self.user.last_name, self.user.email)
                 
 class Registration(models.Model):
     email = models.EmailField()

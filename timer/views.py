@@ -38,6 +38,26 @@ def time_records_view(request):
     return render_response(request,'timer/time_records.html', context)
 
 @login_required
+def time_records_csv(request):
+    from django.http import HttpResponse
+    from django.template import loader, Context
+    import csv
+
+    time_records = TimeRecord.objects.get_time_records(request)
+    response = HttpResponse(mimetype='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=time_records.csv'
+
+    writer = csv.writer(response)
+    writer.writerow(["Start Date", "Stop Date", "title"])
+    for time_record in time_records:
+        writer.writerow([ "%s" % time_record.start_date,
+                          "%s" % time_record.stop_date,
+                          time_record.title,])
+    return response
+
+
+
+@login_required
 def today_time_records_view(request):
     kw_filter = { 'start_date__gte': date.today()}
     time_records = paginate(TimeRecord.objects.get_time_records(request).filter(**kw_filter), 

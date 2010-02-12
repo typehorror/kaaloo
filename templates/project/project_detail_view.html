@@ -81,13 +81,22 @@
     </div>
 
 	<div class="span-18">
-	<h2>Tasks</h2>
-	<ul>
-	{% for task in project.project_tasks.all %}
-	    <li>{{ task.title }} (<a href="#">remove</a>)</li>
-	{% endfor %}
-	</ul>
-	<input type="button" value="Add task" class="button" />
+	<h2 style="border-bottom: 1px solid #eeeeee;">Tasks</h2>
+	
+	<div class="span-18 project_new_task_form">
+    	<div style="padding: 5px">
+	        <form action="#" method="post" class="white">
+	            <div>
+	            {{ new_task_form.title.label_tag }} {{ new_task_form.title }}
+	            </div>
+	            <div>
+	            {{ goal_form.title }} {{ goal_form.is_done }} {{ goal_form.is_done.label_tag }}
+	            </div>
+    		</form>
+	    </div>
+	</div>
+
+	
 	</div>
 
 {% endblock %}

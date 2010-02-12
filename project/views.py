@@ -8,8 +8,10 @@ from django.shortcuts import render_to_response
 from django.db.models import Q
 
 from common.shortcuts import render_response, render_string
-from project.forms import ProjectForm, NewProjectForm, ProjectSpectatorForm
-from project.models import Project
+from forms import ProjectForm, NewProjectForm, ProjectSpectatorForm
+from models import Project
+from task.forms import NewTaskForm, GoalForm
+
 
 @login_required
 def project_list_view(request):
@@ -42,7 +44,8 @@ def project_detail_view(request,id):
     context['is_creator'] = project.is_creator(request.user)
     context['is_admin'] = project.is_admin(request.user)
     context['new_owners'] = User.objects.filter(profile__contacts__user=request.user).exclude(owned_projects = project).select_related()
-
+    context['new_task_form'] = NewTaskForm()
+    context['goal_form'] = GoalForm()
     return render_response(request, 'project/project_detail_view.html', context)
 
 @login_required

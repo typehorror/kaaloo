@@ -541,10 +541,18 @@ div.project_item{
 
 #id_task_title_form input{
     color: gray;
+    padding: 2px;
 }
 
 #id_task_title_form input:focus{
     color: black;
 }
 
-
+.project_new_task_form{
+    background-color: #D19A7B;
+    -moz-border-radius:10px;
+    margin-bottom:10px;
+}
+.project_new_task_form label{
+    color: white;
+}

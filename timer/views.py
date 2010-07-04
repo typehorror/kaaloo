@@ -50,8 +50,8 @@ def time_records_csv(request):
     writer = csv.writer(response)
     writer.writerow(["Start Date", "Stop Date", "title"])
     for time_record in time_records:
-        writer.writerow([ "%s" % time_record.start_date_localized,
-                          "%s" % time_record.stop_date_localized,
+        writer.writerow([ "%s" % time_record.start_date_localized.strftime('%m/%d/%Y %H:%M:%S'),
+                          "%s" % time_record.stop_date_localized.strftime('%m/%d/%Y %H:%M:%S'),
                           time_record.title,])
     return response
 

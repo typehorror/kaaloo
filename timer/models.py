@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from task.models import Task, Goal
+from django.conf import settings
 
 class TimeRecordManager(models.Manager):
     def get_time_record(self, request, auto_create=False, id=None):
@@ -53,8 +54,26 @@ class TimeRecord(models.Model):
     objects = TimeRecordManager()
 
     @property
+    def start_date_localized(self):
+        """
+        return localized start date
+        """
+        from timezones.utils import adjust_datetime_to_timezone
+        return adjust_datetime_to_timezone(self.start_date, settings.TIME_ZONE, self.user.get_profile().timezone)
+
+    @property
+    def stop_date_localized(self):
+        """
+        return localized stop date
+        """
+        from timezones.utils import adjust_datetime_to_timezone
+        return adjust_datetime_to_timezone(
+            self.stop_date,
+            settings.TIME_ZONE, 
+            self.user.get_profile().timezone)
+
+    @property
     def seconds(self):
-        #import pdb; pdb.set_trace()
         if self.stop_date:
             time_delta = self.stop_date - self.start_date
             return time_delta.seconds + (time_delta.days * 24 * 3600)

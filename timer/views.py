@@ -43,15 +43,15 @@ def time_records_csv(request):
     from django.template import loader, Context
     import csv
 
-    time_records = TimeRecord.objects.get_time_records(request)
+    time_records = TimeRecord.objects.get_time_records(request).exclude(stop_date=None)
     response = HttpResponse(mimetype='text/csv')
     response['Content-Disposition'] = 'attachment; filename=time_records.csv'
 
     writer = csv.writer(response)
     writer.writerow(["Start Date", "Stop Date", "title"])
     for time_record in time_records:
-        writer.writerow([ "%s" % time_record.start_date,
-                          "%s" % time_record.stop_date,
+        writer.writerow([ "%s" % time_record.start_date_localized,
+                          "%s" % time_record.stop_date_localized,
                           time_record.title,])
     return response
 

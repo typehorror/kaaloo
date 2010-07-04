@@ -42,7 +42,8 @@ class ProfileForm(forms.ModelForm):
                   'city',
                   'zip_code',
                   'country',
-                  'state',)
+                  'state',
+                  'timezone')
 
 class LoginForm(forms.Form):
     """
